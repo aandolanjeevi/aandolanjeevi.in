@@ -1,0 +1,47 @@
+siteTitle: आंदोलनजीवी
+tagline: सार्वजनिक आंदोलनों के लिए संसाधन — गाइड, समाचार, उपकरण और अभिलेख।
+nav:
+  resources: संसाधन
+  posts: पोस्ट
+  submit: लिंक भेजें
+langNames:
+  en: English
+  hi: हिन्दी
+categories:
+  legal: क़ानूनी
+  safety-health: सुरक्षा और स्वास्थ्य
+  digital-security: डिजिटल सुरक्षा
+  news-media: समाचार और मीडिया
+  organizing: संगठन
+  aid-support: सहायता और समर्थन
+kinds:
+  article: लेख
+  pdf: पीडीएफ़
+  guide: गाइड
+  video: वीडियो
+  post: पोस्ट
+  app: ऐप
+  form: फ़ॉर्म
+  map: नक्शा
+entry:
+  viewOriginal: मूल स्रोत देखें
+  archivedCopy: संग्रहीत प्रति
+  originalUnavailable: मूल स्रोत उपलब्ध नहीं — संग्रहीत प्रति दिखाई जा रही है
+  translatedFrom: "{lang} से अनूदित"
+  added: जोड़ा गया
+posts:
+  heading: व्यवस्थापकों की पोस्ट
+  readMore: आगे पढ़ें
+  backToHome: मुखपृष्ठ पर वापस
+submit:
+  heading: लिंक भेजें
+  intro: >-
+    कोई गाइड, लेख या उपकरण जो यहाँ होना चाहिए? हमें भेजें। हर सुझाव
+    प्रकाशित होने से पहले संचालकों द्वारा जाँचा जाता है।
+  interim: >-
+    गुमनाम सबमिशन फ़ॉर्म अभी निर्माणाधीन है। तब तक आप GitHub पर इशू खोलकर
+    लिंक सुझा सकते हैं।
+  cta: GitHub पर लिंक सुझाएँ
+footer:
+  license: सामग्री CC BY-NC-SA 4.0 के अंतर्गत
+  source: सोर्स कोड

@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/index.html"
+---
+<p class="tagline">{{ "tagline" | t(lang) }}</p>
+
+<section id="resources">
+  <h1>{{ "nav.resources" | t(lang) }}</h1>
+  {%- for cat in site.categories %}
+  {%- set catEntries = resources | where("category", cat) %}
+  {%- if catEntries.length %}
+  <section class="category">
+    <h2 id="{{ cat }}">{{ ("categories." + cat) | t(lang) }}</h2>
+    <ul class="entries">
+      {%- for entry in catEntries %}
+      {%- include "resource-entry.njk" %}
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+</section>
+
+<section id="posts">
+  <h2>{{ "posts.heading" | t(lang) }}</h2>
+  <ul class="post-list">
+    {%- for post in collections.posts %}
+    <li>
+      <a href="{{ post.url }}" lang="{{ post.data.lang }}">{{ post.data.title }}</a>
+      <time datetime="{{ post.date | readableDate }}">{{ post.date | readableDate }}</time>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>

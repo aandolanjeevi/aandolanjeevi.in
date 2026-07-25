@@ -1,0 +1,26 @@
+{%- set t_title = entry.title | ltext(lang, entry.language) -%}
+{%- set t_desc = entry.description | ltext(lang, entry.language) -%}
+<li class="entry">
+  <p class="entry-title" lang="{{ t_title.lang }}">
+    {%- if entry.status == "dead" and entry.archive.wayback -%}
+      <a href="{{ entry.archive.wayback }}">{{ t_title.value }}</a>
+    {%- else -%}
+      <a href="{{ entry.url }}">{{ t_title.value }}</a>
+    {%- endif -%}
+  </p>
+  {%- if t_title.lang != entry.language %}
+  <p class="translated-marker">({{ ("entry.translatedFrom" | t(lang)) | replace("{lang}", ("langNames." + entry.language) | t(lang)) }})</p>
+  {%- endif %}
+  {%- if t_desc.value %}
+  <p class="entry-desc" lang="{{ t_desc.lang }}">{{ t_desc.value }}</p>
+  {%- endif %}
+  <p class="entry-meta">
+    <span class="badge">{{ ("kinds." + entry.kind) | t(lang) }}</span>
+    <span class="badge">{{ ("langNames." + entry.language) | t(lang) }}</span>
+    {%- if entry.status == "dead" %}
+    <span class="badge badge-dead">{{ "entry.originalUnavailable" | t(lang) }}</span>
+    {%- elif entry.archive.wayback %}
+    · <a href="{{ entry.archive.wayback }}">{{ "entry.archivedCopy" | t(lang) }}</a>
+    {%- endif %}
+  </p>
+</li>

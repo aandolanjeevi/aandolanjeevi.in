@@ -1,0 +1,17 @@
+name: aandolanjeevi.in
+url: https://aandolanjeevi.in
+languages:
+  - en
+  - hi
+defaultLanguage: en
+categories:
+  - legal
+  - safety-health
+  - digital-security
+  - news-media
+  - organizing
+  - aid-support
+kinds:
+  archivable: [article, pdf, guide, video, post]
+  interactive: [app, form, map]
+repo: https://github.com/aandolanjeevi/aandolanjeevi.in

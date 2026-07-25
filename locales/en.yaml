@@ -1,0 +1,47 @@
+siteTitle: Aandolanjeevi
+tagline: Resources for public protests — guides, news, tools, and archives.
+nav:
+  resources: Resources
+  posts: Posts
+  submit: Submit a link
+langNames:
+  en: English
+  hi: हिन्दी
+categories:
+  legal: Legal
+  safety-health: Safety & Health
+  digital-security: Digital Security
+  news-media: News & Media
+  organizing: Organizing
+  aid-support: Aid & Support
+kinds:
+  article: article
+  pdf: PDF
+  guide: guide
+  video: video
+  post: post
+  app: app
+  form: form
+  map: map
+entry:
+  viewOriginal: View original
+  archivedCopy: Archived copy
+  originalUnavailable: Original unavailable — showing archived copy
+  translatedFrom: "translated from {lang}"
+  added: Added
+posts:
+  heading: Posts from the admins
+  readMore: Read more
+  backToHome: Back to home
+submit:
+  heading: Submit a link
+  intro: >-
+    Know a guide, article, or tool that belongs here? Send it to us. Every
+    submission is reviewed by maintainers before it appears on the site.
+  interim: >-
+    The anonymous submission form is under construction. Until it's ready, you
+    can suggest a link by opening a GitHub issue.
+  cta: Suggest a link on GitHub
+footer:
+  license: Content licensed CC BY-NC-SA 4.0
+  source: Source code

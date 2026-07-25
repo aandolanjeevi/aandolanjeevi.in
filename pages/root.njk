@@ -1,0 +1,20 @@
+---
+permalink: /index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="{{ site.defaultLanguage }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=/{{ site.defaultLanguage }}/">
+  <link rel="canonical" href="{{ site.url }}/{{ site.defaultLanguage }}/">
+  <title>aandolanjeevi.in</title>
+</head>
+<body>
+  <p>
+    {%- for l in site.languages %}
+    <a href="/{{ l }}/" lang="{{ l }}">{{ ("langNames." + l) | t(l) }}</a>
+    {%- endfor %}
+  </p>
+</body>
+</html>

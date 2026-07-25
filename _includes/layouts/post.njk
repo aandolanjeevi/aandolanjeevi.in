@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+---
+<article class="post" lang="{{ lang }}">
+  <h1>{{ title }}</h1>
+  <p class="meta"><time datetime="{{ page.date | readableDate }}">{{ page.date | readableDate }}</time></p>
+  {{ content | safe }}
+  <p><a href="/{{ lang }}/">← {{ "posts.backToHome" | t(lang) }}</a></p>
+</article>

@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/submit/index.html"
+---
+<h1>{{ "submit.heading" | t(lang) }}</h1>
+<p>{{ "submit.intro" | t(lang) }}</p>
+{# Interim path until the anonymous Worker form (M6) is built. #}
+<p>{{ "submit.interim" | t(lang) }}</p>
+<p><a class="button" href="{{ site.repo }}/issues/new">{{ "submit.cta" | t(lang) }}</a></p>

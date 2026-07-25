@@ -1,0 +1,109 @@
+/* Minimal, neutral. Noto Sans self-hosting lands with M4 (see PLAN.md);
+   until then rely on system-installed Noto/system stack, which covers
+   Indic scripts on all modern OSes. */
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #666666;
+  --line: #dddddd;
+  --link: #0044cc;
+  --dead: #a03030;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --fg: #e6e6e6;
+    --muted: #999999;
+    --line: #333333;
+    --link: #7aa2ff;
+    --dead: #e08080;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  max-width: 44rem;
+  font-family: "Noto Sans", "Noto Sans Devanagari", ui-sans-serif, system-ui,
+    sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a { color: var(--link); }
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.site-name {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--fg);
+}
+.site-header nav {
+  display: flex;
+  gap: 1rem;
+}
+.lang-switch { margin-left: auto; }
+
+.tagline { color: var(--muted); }
+
+h1, h2 { line-height: 1.25; }
+h2 {
+  margin-top: 2rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+ul.entries, ul.post-list {
+  list-style: none;
+  padding: 0;
+}
+.entry { margin-bottom: 1.25rem; }
+.entry-title { margin: 0; font-weight: 600; }
+.entry-desc { margin: 0.15rem 0; }
+.entry-meta, .translated-marker {
+  margin: 0.15rem 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.badge {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0 0.35rem;
+}
+.badge-dead { color: var(--dead); border-color: var(--dead); }
+
+.post-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.post-list time { color: var(--muted); font-size: 0.85rem; }
+
+.meta { color: var(--muted); font-size: 0.85rem; }
+
+.button {
+  display: inline-block;
+  border: 1px solid var(--link);
+  border-radius: 4px;
+  padding: 0.35rem 0.85rem;
+  text-decoration: none;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
