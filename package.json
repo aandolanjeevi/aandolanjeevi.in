@@ -7,7 +7,9 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "archive": "node scripts/archive-wayback.js"
+    "archive": "node scripts/archive-wayback.js",
+    "check-links": "node scripts/check-links.js",
+    "fonts": "node scripts/fetch-fonts.js"
   },
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {

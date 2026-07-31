@@ -57,7 +57,12 @@ Text shown outside its source language is automatically marked
 ## Adding a language
 
 Copy `locales/en.yaml` to `locales/<code>.yaml`, translate the values, and add
-the code to `languages` in `_data/site.yaml`. That's the whole change.
+the code to `languages` in `_data/site.yaml`. That's the whole change for
+Latin- or Devanagari-script languages (the vendored Noto Sans covers both).
+
+For a language in another script (Tamil, Bengali, Telugu, …), also add its
+Noto family/subset to `FAMILIES` in `scripts/fetch-fonts.js` and re-run
+`npm run fonts` to vendor the glyphs.
 
 ## Contributing
 

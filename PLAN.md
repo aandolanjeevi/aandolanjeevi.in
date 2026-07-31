@@ -52,8 +52,8 @@ if the source disappears.
 
 ## Must-do
 
-- **M1 (P1) — Scaffold the 11ty site.** Link index rendered from data files;
-  filterable listing by category/kind/language. _Depends on: M2._
+- **M1 (P1) — Scaffold the 11ty site. ✅ DONE.** Link index rendered from data
+  files, grouped by category with kind/language badges. _Depends on: M2._
 - **M2 (P1) — Taxonomy + schema. DECIDED.** Kinds:
   `article | pdf | guide | video | post | app | form | map`. Categories: the
   six above. Schema: one YAML file per entry (filename = slug) with `url`,
@@ -61,13 +61,13 @@ if the source disappears.
   `added`, `status` (`live|dead`), and an `archive` block (`wayback`,
   `ia_item`, `zenodo_doi`, `sha256`, `captured_at`, `screenshot`).
   _Depends on: —._
-- **M3 (P1) — Deploy + domain.** Cloudflare Pages or Netlify free tier, wired
-  to `aandolanjeevi.in`, deploy on merge to `main`, PR previews.
+- **M3 (P1) — Deploy + domain. ✅ DONE.** Cloudflare Pages wired to
+  `aandolanjeevi.in`, builds on merge to `main`, PR previews. _Depends on: M1._
+- **M4 (P2) — Minimal neutral theme. ✅ DONE.** Self-hosted Noto Sans (Latin +
+  Devanagari subsets, vendored by `scripts/fetch-fonts.js`), readable defaults,
+  dark/light via `prefers-color-scheme`, semantic/accessible markup.
   _Depends on: M1._
-- **M4 (P2) — Minimal neutral theme.** Self-hosted Noto Sans (per-script
-  subsets for Indic coverage), readable defaults, dark/light via
-  `prefers-color-scheme`, keyboard/screen-reader accessible. _Depends on: M1._
-- **M5 (P2) — Admin posts.** Markdown post collection + RSS feed.
+- **M5 (P2) — Admin posts. ✅ DONE.** Markdown post collection + Atom feed.
   _Depends on: M1._
 - **M6 (P2) — Anonymous submission path.** Static form on the site (url, why
   it matters, suggested kind/tags) posting to a free Cloudflare Worker that
@@ -75,18 +75,21 @@ if the source disappears.
   identity in public issues. Form fields: url, why it matters, suggested
   category/kind. A GitHub Issue Forms template exists as a secondary path for GitHub-savvy users. Maintainer converts approved issues
   to data entries manually. _Depends on: M1, M3._
-- **M7 (P2) — Archival v1: Wayback save.** GitHub Action triggers Internet
-  Archive Save Page Now for every new link on merge; stores the snapshot URL
-  in the entry. Cheap, immediate value. _Depends on: M1._
+- **M7 (P2) — Archival v1: Wayback save. ✅ DONE.** GitHub Action
+  (`scripts/archive-wayback.js`) triggers Internet Archive Save Page Now for
+  every new link on merge, weekly, and on demand; stores the snapshot URL in
+  the entry. Uses an optional archive.org S3 key for higher limits.
+  _Depends on: M1._
 - **M8 (P2) — Archival v2: WARC packages.** Capture script (editor-run or
   Action): page + media → WARC + file manifest with SHA-256 per file → upload
   as an IA item via the `ia` CLI → mirror the package to a Zenodo
   restricted-access record (cold storage, released on approved request) →
   record IA item URL, Zenodo DOI, and package hash in the entry.
   _Depends on: M2, M7._
-- **M9 (P3) — Dead-link failover.** Weekly `lychee` link check; a dead source
-  flags the entry and the site promotes the archived copy to primary link.
-  _Depends on: M7 (better with M8)._
+- **M9 (P3) — Dead-link failover. ✅ DONE.** Weekly link check
+  (`scripts/check-links.js`, conservative: 404/410 or vanished domain only);
+  a dead source flips `status` and the site promotes the archived copy to the
+  primary link. _Depends on: M7 (better with M8)._
 - **M10 (P2) — Multilingual UI.** Every interface string externalized to
   per-language locale files (JSON/YAML); Hindi + English ship at launch with a
   language toggle; adding another Indian language means adding one locale file,
