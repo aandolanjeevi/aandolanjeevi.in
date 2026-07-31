@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title or ("siteTitle" | t(lang)) }} · {{ "siteTitle" | t(lang) }}</title>
+  <title>{% if title %}{{ title }} · {% endif %}{{ "siteTitle" | t(lang) }}</title>
   <meta name="description" content="{{ "tagline" | t(lang) }}">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="{{ "siteTitle" | t(lang) }}">
