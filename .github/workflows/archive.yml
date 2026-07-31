@@ -1,0 +1,48 @@
+name: Archive links (Wayback)
+
+# Snapshots every resource link to the Internet Archive and writes the Wayback
+# URL back into its entry. Runs when new/changed entries land, weekly to retry
+# rate-limited saves, and on demand. See PLAN.md M7.
+on:
+  push:
+    branches: [main]
+    paths: ["resources/**"]
+  schedule:
+    - cron: "17 3 * * 1" # Mondays 03:17 UTC
+  workflow_dispatch:
+
+# GITHUB_TOKEN pushes do not retrigger workflows, so the write-back below
+# cannot loop. Cloudflare Pages still rebuilds on the bot commit (intended).
+permissions:
+  contents: write
+
+concurrency:
+  group: archive-wayback
+  cancel-in-progress: false
+
+jobs:
+  wayback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Save snapshots
+        run: node scripts/archive-wayback.js
+        env:
+          # Optional archive.org S3 key; raises Save Page Now limits when set.
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+      - name: Commit snapshot URLs
+        run: |
+          if [[ -n "$(git status --porcelain resources)" ]]; then
+            git config user.name "aandolanjeevi-bot"
+            git config user.email "bot@aandolanjeevi.in"
+            git add resources
+            git commit -m "chore: record wayback snapshots [skip ci]"
+            git push
+          else
+            echo "No new snapshots to record."
+          fi

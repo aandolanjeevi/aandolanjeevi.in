@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "eleventy",
-    "serve": "eleventy --serve"
+    "serve": "eleventy --serve",
+    "archive": "node scripts/archive-wayback.js"
   },
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
