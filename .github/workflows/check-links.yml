@@ -1,0 +1,39 @@
+name: Check links (dead-link failover)
+
+# Flips a resource's status to dead when its link is unambiguously gone (so the
+# site serves the archived copy), and back to live if it recovers. Conservative
+# by design — see scripts/check-links.js. PLAN.md M9.
+on:
+  schedule:
+    - cron: "41 4 * * 3" # Wednesdays 04:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: check-links
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Check links
+        run: node scripts/check-links.js
+      - name: Commit status changes
+        run: |
+          if [[ -n "$(git status --porcelain resources)" ]]; then
+            git config user.name "aandolanjeevi-bot"
+            git config user.email "bot@aandolanjeevi.in"
+            git add resources
+            git commit -m "chore: update link status [skip ci]"
+            git push
+          else
+            echo "No status changes."
+          fi
