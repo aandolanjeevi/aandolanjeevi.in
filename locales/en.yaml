@@ -37,11 +37,33 @@ submit:
   heading: Submit a link
   intro: >-
     Know a guide, article, or tool that belongs here? Send it to us. Every
-    submission is reviewed by maintainers before it appears on the site.
+    submission is reviewed by maintainers before it appears on the site. You do
+    not need an account, and we do not ask for or store who you are.
   interim: >-
-    The anonymous submission form is under construction. Until it's ready, you
-    can suggest a link by opening a GitHub issue.
+    The anonymous submission form is being set up. Until it's ready, you can
+    suggest a link by opening a GitHub issue.
   cta: Suggest a link on GitHub
+  fields:
+    url: Link (URL)
+    title: Title (optional)
+    category: Category
+    kind: Type
+    why: Why does this belong here? (optional)
+    choose: "— choose —"
+  submit: Send for review
+  privacyNote: >-
+    This form does not collect your name, email, or IP. Submissions go to a
+    review queue and are never published automatically.
+  success:
+    heading: Thank you
+    body: >-
+      Your submission has reached our review queue. A maintainer will check it
+      before it appears on the site.
+  error:
+    heading: Something went wrong
+    body: >-
+      Your submission could not be sent. Please try again, or suggest the link
+      on GitHub.
 footer:
   license: Content licensed CC BY-NC-SA 4.0
   source: Source code

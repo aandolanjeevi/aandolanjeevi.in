@@ -69,12 +69,17 @@ if the source disappears.
   _Depends on: M1._
 - **M5 (P2) — Admin posts. ✅ DONE.** Markdown post collection + Atom feed.
   _Depends on: M1._
-- **M6 (P2) — Anonymous submission path.** Static form on the site (url, why
-  it matters, suggested kind/tags) posting to a free Cloudflare Worker that
-  files a bot-authored GitHub issue — no GitHub account needed, no submitter
-  identity in public issues. Form fields: url, why it matters, suggested
-  category/kind. A GitHub Issue Forms template exists as a secondary path for GitHub-savvy users. Maintainer converts approved issues
-  to data entries manually. _Depends on: M1, M3._
+- **M6 (P2) — Anonymous submission path. 🔨 BUILT, awaiting deploy.** Static
+  form (`pages/submit.njk`, fields: url, title, category, kind, why) posting to
+  a Cloudflare Worker (`workers/submit-worker/`) that files a bot-authored
+  GitHub issue — no GitHub account needed, no submitter identity recorded.
+  Honeypot + optional Turnstile for spam; per-language thanks/error pages;
+  falls back to a GitHub-issue link until `submitEndpoint` is set. GitHub Issue
+  Forms template (`.github/ISSUE_TEMPLATE/`) is the secondary path. **Your
+  steps:** create a bot token, `wrangler secret put GITHUB_TOKEN`,
+  `wrangler deploy`, set `submitEndpoint` in `_data/site.yaml` — see the worker
+  README. Maintainer converts approved issues to entries manually (automate in
+  G1/G2). _Depends on: M1, M3._
 - **M7 (P2) — Archival v1: Wayback save. ✅ DONE.** GitHub Action
   (`scripts/archive-wayback.js`) triggers Internet Archive Save Page Now for
   every new link on merge, weekly, and on demand; stores the snapshot URL in

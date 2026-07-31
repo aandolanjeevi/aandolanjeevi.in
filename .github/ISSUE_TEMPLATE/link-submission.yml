@@ -1,0 +1,58 @@
+name: Link submission
+description: Suggest a resource for the site (secondary to the anonymous web form)
+title: "Link submission: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Prefer the anonymous form at https://aandolanjeevi.in/en/submit/ — it
+        needs no GitHub account and records no identity. This template is for
+        GitHub users who would rather file directly.
+  - type: input
+    id: url
+    attributes:
+      label: Link (URL)
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+    validations:
+      required: false
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - legal
+        - safety-health
+        - digital-security
+        - news-media
+        - organizing
+        - aid-support
+    validations:
+      required: false
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options:
+        - article
+        - pdf
+        - guide
+        - video
+        - post
+        - app
+        - form
+        - map
+    validations:
+      required: false
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does this belong here?
+    validations:
+      required: false

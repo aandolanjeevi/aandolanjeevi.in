@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aandolanjeevi-submit",
+  "main": "src/index.js",
+  "compatibility_date": "2024-11-01",
+  "vars": {
+    "GITHUB_OWNER": "aandolanjeevi",
+    "GITHUB_REPO": "aandolanjeevi.in",
+    "SITE_URL": "https://aandolanjeevi.in",
+    "ISSUE_LABEL": "submission",
+    "ALLOWED_LANGS": "en,hi",
+    "ALLOWED_CATEGORIES": "legal,safety-health,digital-security,news-media,organizing,aid-support",
+    "ALLOWED_KINDS": "article,pdf,guide,video,post,app,form,map"
+  }
+  // Secrets (set with `wrangler secret put`, never commit):
+  //   GITHUB_TOKEN     — required; fine-grained PAT with Issues: read+write on the repo
+  //   TURNSTILE_SECRET — optional; enables spam protection when set
+}

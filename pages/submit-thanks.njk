@@ -1,0 +1,12 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/submit/thanks/index.html"
+eleventyExcludeFromCollections: true
+---
+<h1>{{ "submit.success.heading" | t(lang) }}</h1>
+<p>{{ "submit.success.body" | t(lang) }}</p>
+<p><a href="/{{ lang }}/">← {{ "posts.backToHome" | t(lang) }}</a></p>

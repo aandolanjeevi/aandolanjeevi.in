@@ -19,10 +19,12 @@ export default function (eleventyConfig) {
   const locales = loadLocales();
 
   eleventyConfig.addPlugin(rssPlugin);
-  // Repo docs are not site pages.
+  // Repo docs and non-site directories are not site pages.
   for (const f of ["README.md", "PLAN.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md"]) {
     eleventyConfig.ignores.add(f);
   }
+  eleventyConfig.ignores.add("workers");
+  eleventyConfig.ignores.add("scripts");
   eleventyConfig.addDataExtension("yaml,yml", (contents) => yaml.load(contents));
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("fonts");

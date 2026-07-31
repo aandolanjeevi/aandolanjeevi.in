@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/submit/error/index.html"
+eleventyExcludeFromCollections: true
+---
+<h1>{{ "submit.error.heading" | t(lang) }}</h1>
+<p>{{ "submit.error.body" | t(lang) }}</p>
+<p><a class="button" href="{{ site.repo }}/issues/new">{{ "submit.cta" | t(lang) }}</a></p>
+<p><a href="/{{ lang }}/submit/">← {{ "submit.heading" | t(lang) }}</a></p>

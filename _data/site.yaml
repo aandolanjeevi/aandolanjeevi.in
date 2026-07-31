@@ -15,3 +15,8 @@ kinds:
   archivable: [article, pdf, guide, video, post]
   interactive: [app, form, map]
 repo: https://github.com/aandolanjeevi/aandolanjeevi.in
+# Submission Worker endpoint (M6). Empty until the Worker is deployed; while
+# empty the submit page falls back to the GitHub-issue link.
+submitEndpoint: ""
+# Cloudflare Turnstile site key for spam protection. Empty = widget hidden.
+turnstileSiteKey: ""

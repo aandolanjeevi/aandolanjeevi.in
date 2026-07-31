@@ -99,6 +99,45 @@ ul.entries, ul.post-list {
   text-decoration: none;
 }
 
+.submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 32rem;
+}
+.submit-form label { margin-top: 0.75rem; font-weight: 600; }
+.submit-form input,
+.submit-form select,
+.submit-form textarea {
+  padding: 0.4rem 0.5rem;
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.submit-form textarea { resize: vertical; }
+.submit-form button {
+  margin-top: 1rem;
+  align-self: flex-start;
+  padding: 0.45rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  color: var(--bg);
+  background: var(--link);
+  border: 1px solid var(--link);
+  border-radius: 4px;
+}
+.privacy-note { font-size: 0.85rem; color: var(--muted); }
+/* Honeypot: off-screen, not display:none (bots skip display:none). */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .site-footer {
   margin-top: 3rem;
   padding-top: 1rem;

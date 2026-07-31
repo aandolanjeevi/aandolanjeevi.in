@@ -8,6 +8,53 @@ permalink: "/{{ lang }}/submit/index.html"
 ---
 <h1>{{ "submit.heading" | t(lang) }}</h1>
 <p>{{ "submit.intro" | t(lang) }}</p>
-{# Interim path until the anonymous Worker form (M6) is built. #}
+
+{%- if site.submitEndpoint %}
+<form class="submit-form" method="POST" action="{{ site.submitEndpoint }}">
+  <input type="hidden" name="lang" value="{{ lang }}">
+  {# Honeypot: real people leave this empty; the Worker rejects it if filled. #}
+  <div aria-hidden="true" class="hp">
+    <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+  </div>
+
+  <label for="f-url">{{ "submit.fields.url" | t(lang) }}</label>
+  <input id="f-url" type="url" name="url" required placeholder="https://">
+
+  <label for="f-title">{{ "submit.fields.title" | t(lang) }}</label>
+  <input id="f-title" type="text" name="title" maxlength="200">
+
+  <label for="f-category">{{ "submit.fields.category" | t(lang) }}</label>
+  <select id="f-category" name="category">
+    <option value="">{{ "submit.fields.choose" | t(lang) }}</option>
+    {%- for cat in site.categories %}
+    <option value="{{ cat }}">{{ ("categories." + cat) | t(lang) }}</option>
+    {%- endfor %}
+  </select>
+
+  <label for="f-kind">{{ "submit.fields.kind" | t(lang) }}</label>
+  <select id="f-kind" name="kind">
+    <option value="">{{ "submit.fields.choose" | t(lang) }}</option>
+    {%- for k in site.kinds.archivable %}
+    <option value="{{ k }}">{{ ("kinds." + k) | t(lang) }}</option>
+    {%- endfor %}
+    {%- for k in site.kinds.interactive %}
+    <option value="{{ k }}">{{ ("kinds." + k) | t(lang) }}</option>
+    {%- endfor %}
+  </select>
+
+  <label for="f-why">{{ "submit.fields.why" | t(lang) }}</label>
+  <textarea id="f-why" name="why" rows="4" maxlength="1000"></textarea>
+
+  {%- if site.turnstileSiteKey %}
+  <div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}"></div>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  {%- endif %}
+
+  <p class="privacy-note">{{ "submit.privacyNote" | t(lang) }}</p>
+  <button type="submit">{{ "submit.submit" | t(lang) }}</button>
+</form>
+{%- else %}
+{# No Worker endpoint configured yet — fall back to the GitHub issue path. #}
 <p>{{ "submit.interim" | t(lang) }}</p>
 <p><a class="button" href="{{ site.repo }}/issues/new">{{ "submit.cta" | t(lang) }}</a></p>
+{%- endif %}
