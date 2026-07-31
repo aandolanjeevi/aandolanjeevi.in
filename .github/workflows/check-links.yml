@@ -8,8 +8,10 @@ on:
     - cron: "41 4 * * 3" # Wednesdays 04:41 UTC
   workflow_dispatch:
 
+# Direct pushes to main are blocked; status changes go through an auto-merged PR.
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: check-links
@@ -26,14 +28,24 @@ jobs:
       - run: npm ci
       - name: Check links
         run: node scripts/check-links.js
-      - name: Commit status changes
+      - name: Open and auto-merge PR for status changes
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [[ -n "$(git status --porcelain resources)" ]]; then
-            git config user.name "aandolanjeevi-bot"
-            git config user.email "bot@aandolanjeevi.in"
-            git add resources
-            git commit -m "chore: update link status [skip ci]"
-            git push
-          else
-            echo "No status changes."
+          if [[ -z "$(git status --porcelain resources)" ]]; then
+            echo "No status changes."; exit 0
           fi
+          branch="bot/link-status-${GITHUB_RUN_ID}"
+          git config user.name "aandolanjeevi-bot"
+          git config user.email "bot@aandolanjeevi.in"
+          git checkout -b "$branch"
+          git add resources
+          git commit -m "chore: update link status"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore: update link status" \
+            --body "Automated dead-link failover status changes. Auto-merged."
+          for i in 1 2 3 4 5; do
+            gh pr merge "$branch" --squash --delete-branch && break
+            sleep 5
+          done
