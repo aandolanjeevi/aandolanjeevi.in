@@ -11,10 +11,12 @@ on:
     - cron: "17 3 * * 1" # Mondays 03:17 UTC
   workflow_dispatch:
 
-# GITHUB_TOKEN pushes do not retrigger workflows, so the write-back below
-# cannot loop. Cloudflare Pages still rebuilds on the bot commit (intended).
+# Direct pushes to main are blocked by branch protection, so the write-back
+# opens a PR and auto-merges it. GITHUB_TOKEN actions do not retrigger
+# workflows, so this cannot loop. Cloudflare Pages rebuilds on merge (intended).
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: archive-wayback
@@ -35,14 +37,25 @@ jobs:
           # Optional archive.org S3 key; raises Save Page Now limits when set.
           IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
           IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
-      - name: Commit snapshot URLs
+      - name: Open and auto-merge PR for snapshot URLs
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [[ -n "$(git status --porcelain resources)" ]]; then
-            git config user.name "aandolanjeevi-bot"
-            git config user.email "bot@aandolanjeevi.in"
-            git add resources
-            git commit -m "chore: record wayback snapshots [skip ci]"
-            git push
-          else
-            echo "No new snapshots to record."
+          if [[ -z "$(git status --porcelain resources)" ]]; then
+            echo "No new snapshots to record."; exit 0
           fi
+          branch="bot/wayback-${GITHUB_RUN_ID}"
+          git config user.name "aandolanjeevi-bot"
+          git config user.email "bot@aandolanjeevi.in"
+          git checkout -b "$branch"
+          git add resources
+          git commit -m "chore: record wayback snapshots"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore: record wayback snapshots" \
+            --body "Automated Wayback snapshot URLs. Auto-merged."
+          # 0 approvals required; retry to absorb mergeability lag.
+          for i in 1 2 3 4 5; do
+            gh pr merge "$branch" --squash --delete-branch && break
+            sleep 5
+          done
