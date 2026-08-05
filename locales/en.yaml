@@ -27,6 +27,7 @@ entry:
   viewOriginal: View original
   archivedCopy: Archived copy
   originalUnavailable: Original unavailable — showing archived copy
+  paywalled: paywalled
   translatedFrom: "translated from {lang}"
   added: Added
 posts:

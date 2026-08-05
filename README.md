@@ -41,6 +41,7 @@ category: legal         # legal | safety-health | digital-security | news-media 
 kind: guide             # article | pdf | guide | video | post | app | form | map
 added: 2026-07-25
 status: live
+# paywalled: true        # optional — labels entries behind a hard paywall
 archive:
   wayback: null
   ia_item: null
