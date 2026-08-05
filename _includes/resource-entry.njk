@@ -17,6 +17,9 @@
   <p class="entry-meta">
     <span class="badge">{{ ("kinds." + entry.kind) | t(lang) }}</span>
     <span class="badge">{{ ("langNames." + entry.language) | t(lang) }}</span>
+    {%- if entry.paywalled %}
+    <span class="badge">{{ "entry.paywalled" | t(lang) }}</span>
+    {%- endif %}
     {%- if entry.status == "dead" %}
     <span class="badge badge-dead">{{ "entry.originalUnavailable" | t(lang) }}</span>
     {%- elif entry.archive.wayback %}
