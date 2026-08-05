@@ -13,8 +13,8 @@ added: 2026-07-25
 status: live
 archive:
   wayback: "https://web.archive.org/web/20260802205745/https://ssd.eff.org/module/attending-protest"
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
-  captured_at: "2026-08-02"
+  ia_item: "https://archive.org/details/aandolanjeevi-eff-surveillance-self-defense-20260805"
+  zenodo_doi: "10.5281/zenodo.21801130"
+  sha256: "a8be12146e7def536a22a3eab7ede32badec9d0b68f70842e42f04c500cdb0a0"
+  captured_at: "2026-08-05"
   screenshot: null
