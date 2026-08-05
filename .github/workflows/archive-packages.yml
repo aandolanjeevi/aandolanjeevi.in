@@ -1,0 +1,64 @@
+name: Archive packages (WARC -> IA + Zenodo)
+
+# Durable archival packages (PLAN.md M8): capture each archivable entry as a
+# WARC package, upload to the Internet Archive, mirror to a restricted Zenodo
+# record, and write the metadata back through an auto-merged PR.
+#
+# Runs weekly + on demand only (not on push) so its write-backs never race the
+# Wayback workflow's PRs over the same entry files.
+#
+# NOTE: Zenodo publishes are permanent. Entries are only processed once
+# (skipped when archive.ia_item is already set).
+on:
+  schedule:
+    - cron: "29 2 * * 5" # Fridays 02:29 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: archive-packages
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: pip install -r scripts/requirements.txt
+      - name: Capture and upload packages
+        run: node scripts/archive-packages.js
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+      - name: Open and auto-merge PR for archive metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ -z "$(git status --porcelain resources)" ]]; then
+            echo "No new packages."; exit 0
+          fi
+          branch="bot/packages-${GITHUB_RUN_ID}"
+          git config user.name "aandolanjeevi-bot"
+          git config user.email "bot@aandolanjeevi.in"
+          git checkout -b "$branch"
+          git add resources
+          git commit -m "chore: record archival packages (IA + Zenodo)"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore: record archival packages (IA + Zenodo)" \
+            --body "Automated WARC package metadata (IA item, Zenodo DOI, package hash). Auto-merged."
+          for i in 1 2 3 4 5; do
+            gh pr merge "$branch" --squash --delete-branch && break
+            sleep 5
+          done

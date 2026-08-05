@@ -1,0 +1,3 @@
+# Python deps for scripts/capture.py (M8 archival capture).
+warcio>=1.7
+requests>=2.31

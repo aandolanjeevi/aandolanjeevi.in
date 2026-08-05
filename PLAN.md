@@ -85,11 +85,13 @@ if the source disappears.
   every new link on merge, weekly, and on demand; stores the snapshot URL in
   the entry. Uses an optional archive.org S3 key for higher limits.
   _Depends on: M1._
-- **M8 (P2) — Archival v2: WARC packages.** Capture script (editor-run or
-  Action): page + media → WARC + file manifest with SHA-256 per file → upload
-  as an IA item via the `ia` CLI → mirror the package to a Zenodo
-  restricted-access record (cold storage, released on approved request) →
-  record IA item URL, Zenodo DOI, and package hash in the entry.
+- **M8 (P2) — Archival v2: WARC packages. 🔨 BUILT, verified in test mode.**
+  `scripts/capture.py` (page + assets → WARC + hashed manifest) +
+  `scripts/archive-packages.js` (upload to IA, mirror to a restricted Zenodo
+  record, write back ia_item / zenodo_doi / sha256 / captured_at). Weekly +
+  on-demand workflow. End-to-end verified against the real APIs with `--test`
+  (IA test_collection, Zenodo draft deleted). First real run is gated on the
+  org "Actions may create PRs" toggle; note Zenodo publishes are permanent.
   _Depends on: M2, M7._
 - **M9 (P3) — Dead-link failover. ✅ DONE.** Weekly link check
   (`scripts/check-links.js`, conservative: 404/410 or vanished domain only);

@@ -8,6 +8,7 @@
     "build": "eleventy",
     "serve": "eleventy --serve",
     "archive": "node scripts/archive-wayback.js",
+    "archive-packages": "node --env-file=.env scripts/archive-packages.js",
     "check-links": "node scripts/check-links.js",
     "fonts": "node scripts/fetch-fonts.js"
   },
