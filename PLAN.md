@@ -58,7 +58,8 @@ if the source disappears.
   `article | pdf | guide | video | post | app | form | map`. Categories: the
   six above. Schema: one YAML file per entry (filename = slug) with `url`,
   language-keyed `title`/`description`, `language`, `category`, `kind`,
-  `added`, `status` (`live|dead`), and an `archive` block (`wayback`,
+  `added`, `status` (`live|dead`), optional `paywalled: true` (labels the
+  entry; see the paywall policy in M11), and an `archive` block (`wayback`,
   `ia_item`, `zenodo_doi`, `sha256`, `captured_at`, `screenshot`).
   _Depends on: —._
 - **M3 (P1) — Deploy + domain. ✅ DONE.** Cloudflare Pages wired to
@@ -105,12 +106,32 @@ if the source disappears.
   "contribute translations" section in CONTRIBUTING. Text displayed outside
   its source language carries a visible "(translated from …)" marker.
   _Depends on: M1, M4._
+- **M12 (P2) — Browser-based capture for client-side-rendered pages.** The
+  static capture (`capture.py`) gets only the HTML shell of JS-rendered pages
+  (SPAs, X/Instagram posts). Add a headless-browser capture path
+  (browsertrix-crawler in CI, or single-file as a lighter fallback) that
+  records rendered content and runtime requests into the WARC. Per-entry
+  `render: true` flag; `kind: post` routes through it automatically. Until
+  then the Wayback layer (browser-based at IA's end) is the effective copy
+  for CSR pages. _Depends on: M8._
+- **M13 (P2) — Video capture via yt-dlp.** `kind: video` currently captures
+  only the page around the player. Fetch the media itself with yt-dlp into
+  the package (size-capped; IA handles large files, Zenodo record links the
+  IA copy if over its limits). _Depends on: M8._
 - **M11 (P3) — Policies + maintainer runbook.** Content inclusion policy, PII
   /minors rules, copyright posture (Wayback links for news articles;
   self-hosted/IA copies for guides and redistribution-friendly material),
   takedown request handling via a dedicated monitored mailbox
   (`takedown [at] aandolanjeevi.in`), and a "how to run this site" doc for
-  future maintainers. _Depends on: —._
+  future maintainers. **Paywall policy:** capture only what an anonymous
+  visitor gets (metered paywalls usually yield full text — archive normally);
+  never bypass a paywall with credentials or cookies — it converts gray-area
+  archiving into clear circumvention and redistribution of paid content. For
+  hard-paywalled items prefer a non-paywalled substitute covering the same
+  facts, keeping the paywalled original only when irreplaceable; entries that
+  remain paywalled carry the optional `paywalled: true` flag so the UI labels
+  them honestly instead of offering a subscribe wall as an "archived copy".
+  _Depends on: —._
 
 ## Good-to-have
 
