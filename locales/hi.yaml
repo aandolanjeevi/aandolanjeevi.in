@@ -23,6 +23,7 @@ kinds:
   app: ऐप
   form: फ़ॉर्म
   map: नक्शा
+  source: स्रोत
 entry:
   viewOriginal: मूल स्रोत देखें
   archivedCopy: संग्रहीत प्रति
