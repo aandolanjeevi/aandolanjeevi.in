@@ -48,6 +48,7 @@ body:
         - app
         - form
         - map
+        - source
     validations:
       required: false
   - type: textarea

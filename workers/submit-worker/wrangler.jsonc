@@ -10,7 +10,7 @@
     "ISSUE_LABEL": "submission",
     "ALLOWED_LANGS": "en,hi",
     "ALLOWED_CATEGORIES": "legal,safety-health,digital-security,news-media,organizing,aid-support",
-    "ALLOWED_KINDS": "article,pdf,guide,video,post,app,form,map"
+    "ALLOWED_KINDS": "article,pdf,guide,video,post,app,form,map,source"
   }
   // Secrets (set with `wrangler secret put`, never commit):
   //   GITHUB_TOKEN     — required; fine-grained PAT with Issues: read+write on the repo

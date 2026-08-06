@@ -23,6 +23,7 @@ kinds:
   app: app
   form: form
   map: map
+  source: source
 entry:
   viewOriginal: View original
   archivedCopy: Archived copy
