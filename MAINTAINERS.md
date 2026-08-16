@@ -22,6 +22,7 @@ workflows including translations.
 | `archive-packages.yml` | Fridays, manual (`test` input for dry runs) | Captures each archivable entry (WARC package), uploads to an Internet Archive item + restricted Zenodo record, writes identifiers back via auto-merged PR |
 | `submission-to-entry.yml` | `approved` label added to a `submission` issue | Drafts the entry file and opens a **review PR** (not auto-merged) with a checklist; comments the PR link on the issue |
 | `archive-refresh.yml` | 1st of the month, manual (`check_only` input) | Re-captures packages older than 60 days; when the page changed, adds dated files to the same IA item and publishes a **new version** of the existing Zenodo record |
+| `screenshots.yml` | 2nd of the month, manual (`refresh` input) | Viewport screenshots for interactive entries (app/form/map/source), stored in `assets/screenshots/` and linked from each entry |
 
 Capture modes (automatic): `static` (default), `render` (headless browser in
 Docker — entries with `render: true` or `kind: post`), `video` (yt-dlp —

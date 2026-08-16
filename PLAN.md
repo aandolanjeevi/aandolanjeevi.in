@@ -162,8 +162,10 @@ if the source disappears.
   index so others can mirror or build on it. _Depends on: M1._
 - **G6 (P3) — Decap CMS.** Web editing UI for non-technical admins (posts and
   entries) committing straight to the repo. _Depends on: M1._
-- **G7 (P3) — Screenshots for interactive apps.** Periodic screenshot capture
-  for `app|form|map` entries as their archival stand-in. _Depends on: M2, M8._
+- **G7 (P3) — Screenshots for interactive apps. ✅ DONE.** Monthly viewport
+  screenshots for `app|form|map|source` entries (browsertrix `--screenshot`,
+  extracted from the WARC, webp in `assets/screenshots/`), written to
+  `archive.screenshot` and linked from each entry. _Depends on: M2, M8._
 - **G8 (P3) — Privacy-respecting analytics.** GoatCounter or none at all;
   never Google Analytics on a protest site. _Depends on: M3._
 - **G9 (P3) — Repo mirror.** Automatic mirror to a second forge (e.g.
