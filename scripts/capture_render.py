@@ -55,8 +55,9 @@ def run_crawl(url, workdir, timeout):
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True,
                           timeout=timeout + 300)
+    if proc.returncode != 0 or os.environ.get("RENDER_DEBUG"):
+        sys.stderr.write(proc.stdout[-3000:] + proc.stderr[-3000:])
     if proc.returncode != 0:
-        sys.stderr.write(proc.stdout[-2000:] + proc.stderr[-2000:])
         print(f"render capture failed: {url}: crawler exit {proc.returncode}",
               file=sys.stderr)
         sys.exit(2)
@@ -113,6 +114,10 @@ def main():
         warcs = glob.glob(
             os.path.join(workdir, "collections", "cap", "archive", "*.warc.gz"))
         if not warcs:
+            for root, _dirs, files in os.walk(workdir):
+                for f in files:
+                    print("workdir file:", os.path.join(root, f),
+                          file=sys.stderr)
             print("render capture failed: crawler produced no WARCs",
                   file=sys.stderr)
             sys.exit(2)
