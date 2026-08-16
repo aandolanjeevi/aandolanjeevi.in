@@ -17,8 +17,8 @@ added: 2026-08-05
 status: live
 archive:
   wayback: "https://web.archive.org/web/20260414175309/https://nyaaya.org/resource/guide-to-lawful-protesting/"
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
-  captured_at: "2026-04-14"
+  ia_item: "https://archive.org/details/aandolanjeevi-guide-to-lawful-protesting-india-20260816"
+  zenodo_doi: "10.5281/zenodo.21961629"
+  sha256: "8200cc8c8b738124d8ad3417d5c8dd3c3d2f3eb1a4717e096e898f7e16bd0998"
+  captured_at: "2026-08-16"
   screenshot: null
