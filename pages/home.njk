@@ -7,8 +7,11 @@ pagination:
 permalink: "/{{ lang }}/index.html"
 searchable: true
 ---
-{# Pagefind classic UI — deprecated in 1.5 in favor of the Component UI but
-   still shipped and stable; migrate when we next touch search. #}
+{# Pagefind classic UI, chosen deliberately over the 1.5 Component UI: as of
+   1.5.2 neither bundles Hindi/Indic translations, and only the classic UI has
+   a documented public `translations` option — so we localize every string
+   (visible and assistive) ourselves below. Revisit if the Component UI gains
+   Indic translations or a public override API. #}
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
 <section id="search-section">
   <h2 class="visually-hidden">{{ "search.heading" | t(lang) }}</h2>
@@ -23,8 +26,16 @@ searchable: true
       showImages: false,
       translations: {
         placeholder: {{ ("search.placeholder" | t(lang)) | dump | safe }},
-        zero_results: {{ ("search.noResults" | t(lang)) | dump | safe }},
-        clear_search: {{ ("search.clear" | t(lang)) | dump | safe }}
+        clear_search: {{ ("search.clear" | t(lang)) | dump | safe }},
+        search_label: {{ ("search.searchLabel" | t(lang)) | dump | safe }},
+        filters_label: {{ ("search.filtersLabel" | t(lang)) | dump | safe }},
+        zero_results: {{ ("search.zeroResults" | t(lang)) | dump | safe }},
+        many_results: {{ ("search.manyResults" | t(lang)) | dump | safe }},
+        one_result: {{ ("search.oneResult" | t(lang)) | dump | safe }},
+        alt_search: {{ ("search.altSearch" | t(lang)) | dump | safe }},
+        search_suggestion: {{ ("search.searchSuggestion" | t(lang)) | dump | safe }},
+        searching: {{ ("search.searching" | t(lang)) | dump | safe }},
+        load_more: {{ ("search.loadMore" | t(lang)) | dump | safe }}
       }
     });
   });

@@ -74,3 +74,12 @@ search:
   placeholder: Search resources and posts
   noResults: No results for [SEARCH_TERM]
   clear: Clear
+  searchLabel: Search this site
+  filtersLabel: Filters
+  zeroResults: No results for [SEARCH_TERM]
+  manyResults: "[COUNT] results for [SEARCH_TERM]"
+  oneResult: "[COUNT] result for [SEARCH_TERM]"
+  altSearch: No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead
+  searchSuggestion: "No results for [SEARCH_TERM]. Try one of the following searches:"
+  searching: Searching for [SEARCH_TERM]...
+  loadMore: Load more results
