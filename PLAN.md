@@ -100,7 +100,7 @@ if the source disappears.
   (`scripts/check-links.js`, conservative: 404/410 or vanished domain only);
   a dead source flips `status` and the site promotes the archived copy to the
   primary link. _Depends on: M7 (better with M8)._
-- **M10 (P2) — Multilingual UI.** Every interface string externalized to
+- **M10 (P2) — Multilingual UI. ✅ DONE.** Every interface string externalized to
   per-language locale files (JSON/YAML); Hindi + English ship at launch with a
   language toggle; adding another Indian language means adding one locale file,
   zero code. Translation-only collaboration is a first-class contribution

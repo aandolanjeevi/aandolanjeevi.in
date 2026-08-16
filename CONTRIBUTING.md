@@ -92,6 +92,31 @@ You can contribute by:
 - Code Contribution
 - Pull Requests
 
+## Contributing Translations
+
+You can contribute translations without setting up anything — the site's
+interface strings live in one file per language:
+
+- `locales/en.yaml` (English), `locales/hi.yaml` (हिन्दी), …
+
+**To improve an existing language:** edit its file directly in the GitHub web
+UI and open a pull request. Every value is plain text; the keys stay in
+English.
+
+**To add a new language:**
+
+1. Copy `locales/en.yaml` to `locales/<code>.yaml` (ISO 639-1 code, e.g.
+   `ta` for Tamil) and translate the values.
+2. Add the code to `languages` in `_data/site.yaml`.
+3. If the language uses a script other than Latin or Devanagari, note it in
+   the PR — a maintainer adds the matching Noto font subset
+   (`scripts/fetch-fonts.js`).
+
+Resource entries can also carry translations: `title` and `description` are
+language-keyed maps, so adding a `ta:` line to any entry is a welcome
+contribution on its own. Text shown outside its source language is
+automatically marked "(translated from …)".
+
 ## Contributing Code
 
 1. Checkout the latest `main` branch to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
