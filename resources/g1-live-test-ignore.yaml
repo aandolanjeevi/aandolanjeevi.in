@@ -1,0 +1,20 @@
+# From submission issue #25. Review before merge:
+# language correct? category set? title/description translations?
+url: "https://example.org/g1-live-test"
+title:
+  en: "G1 live test — ignore"
+description:
+  en: >-
+    Live end-to-end test of the approve-label automation; will be cleaned up.
+language: en
+category: legal
+kind: guide
+added: 2026-08-16
+status: live
+archive:
+  wayback: null
+  ia_item: null
+  zenodo_doi: null
+  sha256: null
+  captured_at: null
+  screenshot: null
