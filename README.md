@@ -27,7 +27,10 @@ Built with [Eleventy](https://www.11ty.dev/). No other runtime required.
 
 ## Adding a resource
 
-Create `resources/<slug>.yaml`:
+Submissions from the website (or the issue template) can be converted
+automatically: add the `approved` label to the submission issue and a review
+PR with the drafted entry appears (see MAINTAINERS.md). To add one by hand,
+create `resources/<slug>.yaml`:
 
 ```yaml
 url: https://example.org/guide
