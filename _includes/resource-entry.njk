@@ -25,5 +25,8 @@
     {%- elif entry.archive.wayback %}
     · <a href="{{ entry.archive.wayback }}">{{ "entry.archivedCopy" | t(lang) }}</a>
     {%- endif %}
+    {%- if entry.archive.screenshot %}
+    · <a href="{{ entry.archive.screenshot }}">{{ "entry.screenshot" | t(lang) }}</a>
+    {%- endif %}
   </p>
 </li>

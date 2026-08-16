@@ -1,0 +1,61 @@
+name: Screenshots (interactive entries)
+
+# Captures viewport screenshots for app|form|map|source entries — their
+# archival stand-in, since living pages get no WARC package. Monthly with
+# --refresh (living pages change); on-demand for new entries. PLAN.md G7.
+on:
+  schedule:
+    - cron: "13 4 2 * *" # 2nd of the month, 04:13 UTC
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Re-capture entries that already have screenshots"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: screenshots
+  cancel-in-progress: false
+
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: pip install -r scripts/requirements.txt
+      - name: Capture screenshots
+        # Scheduled runs always refresh (living pages drift); dispatches opt in.
+        run: node scripts/screenshots.js ${{ (github.event_name == 'schedule' || inputs.refresh) && '--refresh' || '' }}
+      - name: Open and auto-merge PR for screenshots
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ -z "$(git status --porcelain resources assets)" ]]; then
+            echo "No screenshot changes."; exit 0
+          fi
+          branch="bot/screenshots-${GITHUB_RUN_ID}"
+          git config user.name "aandolanjeevi-bot"
+          git config user.email "bot@aandolanjeevi.in"
+          git checkout -b "$branch"
+          git add resources assets
+          git commit -m "chore: update entry screenshots"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore: update entry screenshots" \
+            --body "Automated screenshots for interactive entries. Auto-merged."
+          for i in 1 2 3 4 5; do
+            gh pr merge "$branch" --squash --delete-branch && break
+            sleep 5
+          done
