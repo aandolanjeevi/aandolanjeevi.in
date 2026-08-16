@@ -12,8 +12,8 @@ visitor → POST /submit form → this Worker → GitHub issue (label: submissio
                                    └→ 303 redirect → site /{lang}/submit/thanks
 ```
 
-A maintainer reviews the issue and, if relevant, adds the resource entry
-(later automated — PLAN.md G1/G2).
+A maintainer reviews the issue and, if relevant, adds the `approved` label —
+automation then drafts the entry and opens a review PR (PLAN.md G1).
 
 ## One-time setup
 

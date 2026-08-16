@@ -138,9 +138,11 @@ if the source disappears.
 
 ## Good-to-have
 
-- **G1 (P1) — Submission automation.** Approved label on an issue triggers an
-  Action that opens a PR adding the data entry; merge deploys it.
-  _Depends on: M6._
+- **G1 (P1) — Submission automation. ✅ DONE.** Adding the `approved` label to
+  a `submission` issue triggers `scripts/issue-to-entry.js` via an Action:
+  parses both submission formats, validates category/kind against the
+  taxonomy, and opens a review PR (deliberately not auto-merged — a human
+  checks language/category/translations; merge deploys). _Depends on: M6._
 - **G2 (P2) — Client-side search.** Pagefind — static, free, no backend.
   _Depends on: M1._
 - **G3 (P2) — Hosted translation platform.** Weblate (free for libre

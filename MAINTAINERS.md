@@ -20,6 +20,7 @@ workflows including translations.
 | `archive.yml` (Wayback) | resources push to main, Mondays, manual | Saves each new link to the Wayback Machine, writes the snapshot URL into the entry via auto-merged PR |
 | `check-links.yml` | Wednesdays, manual | Flips `status: live/dead` (conservative: 404/410 or dead domain only); the site then serves the archived copy as primary |
 | `archive-packages.yml` | Fridays, manual (`test` input for dry runs) | Captures each archivable entry (WARC package), uploads to an Internet Archive item + restricted Zenodo record, writes identifiers back via auto-merged PR |
+| `submission-to-entry.yml` | `approved` label added to a `submission` issue | Drafts the entry file and opens a **review PR** (not auto-merged) with a checklist; comments the PR link on the issue |
 
 Capture modes (automatic): `static` (default), `render` (headless browser in
 Docker — entries with `render: true` or `kind: post`), `video` (yt-dlp —
@@ -28,6 +29,19 @@ Docker — entries with `render: true` or `kind: post`), `video` (yt-dlp —
 **Known limits:** YouTube blocks CI runner IPs for video downloads — run
 `npm run archive-packages` locally (needs `.env`, see below) for YouTube
 entries. Never put account cookies into CI to work around this.
+
+## Publishing a submission
+
+1. Review the `submission` issue (see POLICY.md for inclusion criteria).
+2. Add the **`approved`** label — automation drafts `resources/<slug>.yaml`
+   and opens a review PR linked on the issue.
+3. On the PR, work the checklist: set `language`, set `category` (unset
+   entries don't render), check `kind` / `paywalled` / `render`, add
+   translations if you can.
+4. Merge. The issue closes automatically, the site deploys, and the Wayback
+   bot archives the link within minutes.
+
+To decline a submission, close the issue with a short comment instead.
 
 ## Credentials
 
