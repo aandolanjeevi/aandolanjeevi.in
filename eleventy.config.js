@@ -20,7 +20,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(rssPlugin);
   // Repo docs and non-site directories are not site pages.
-  for (const f of ["README.md", "PLAN.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md"]) {
+  for (const f of ["README.md", "PLAN.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "POLICY.md", "MAINTAINERS.md"]) {
     eleventyConfig.ignores.add(f);
   }
   eleventyConfig.ignores.add("workers");

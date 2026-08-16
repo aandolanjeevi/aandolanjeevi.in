@@ -120,7 +120,8 @@ if the source disappears.
   `kind: video` entries — same package contract, routed automatically by the
   orchestrator. Caveat: video hosts may bot-block CI datacenter IPs; when that
   happens, run `npm run archive-packages` locally instead. _Depends on: M8._
-- **M11 (P3) — Policies + maintainer runbook.** Content inclusion policy, PII
+- **M11 (P3) — Policies + maintainer runbook. 🔨 DRAFTED (POLICY.md,
+  MAINTAINERS.md) — review and edit.** Content inclusion policy, PII
   /minors rules, copyright posture (Wayback links for news articles;
   self-hosted/IA copies for guides and redistribution-friendly material),
   takedown request handling via a dedicated monitored mailbox
