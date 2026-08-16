@@ -49,6 +49,7 @@ def run_crawl(url, workdir, timeout):
         "crawl",
         "--url", url,
         "--scopeType", "page",
+        "--allowHashUrls",
         "--collection", "cap",
         "--behaviors", "autoscroll,autoplay,autofetch,siteSpecific",
         "--pageExtraDelay", "5",
