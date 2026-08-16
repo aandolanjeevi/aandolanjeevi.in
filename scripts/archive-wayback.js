@@ -71,9 +71,12 @@ function timestampToDate(ts) {
 }
 
 // Update a single top-level key inside the archive block, preserving the
-// file's formatting and comments (js-yaml dump would discard both).
+// file's formatting and comments (js-yaml dump would discard both). Throws if
+// the key is absent — a silent no-op here loses the snapshot URL and the
+// entry gets re-saved on every run.
 function setArchiveField(text, key, value) {
   const re = new RegExp(`^(\\s*)${key}:.*$`, "m");
+  if (!re.test(text)) throw new Error(`write-back target missing: ${key}`);
   return text.replace(re, `$1${key}: "${value}"`);
 }
 
@@ -85,6 +88,10 @@ async function archiveEntry(file) {
   if (entry?.status !== ARCHIVABLE_STATUS) return { file, skipped: "not-live" };
   if (entry?.archive?.wayback) return { file, skipped: "already-archived" };
   if (!entry?.url) return { file, skipped: "no-url" };
+  if (!/^\s*wayback:/m.test(text) || !/^\s*captured_at:/m.test(text)) {
+    console.error(`skipping  ${file}: missing archive block — add it so the snapshot URL can be recorded`);
+    return { file, skipped: "no-archive-block" };
+  }
 
   let snap = await checkAvailability(entry.url);
   if (!snap && !checkOnly) {

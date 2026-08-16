@@ -152,8 +152,24 @@ async function zenodoUpload(dir, files, meta) {
   }
 }
 
+// Fields the write-back must be able to record. Checked BEFORE anything is
+// published: a permanent Zenodo record with nowhere to write its DOI would be
+// re-published as a duplicate on every later run (happened 2026-08-14).
+const WRITEBACK_KEYS = ["ia_item", "zenodo_doi", "sha256", "captured_at"];
+
+function hasWritebackKeys(text) {
+  return WRITEBACK_KEYS.every((k) => new RegExp(`^\\s*${k}:`, "m").test(text));
+}
+
+// IA identifiers allow only [A-Za-z0-9._-]; a raw slug with spaces made the
+// upload 400 on 2026-08-14.
+function iaSafe(slug) {
+  return slug.replace(/[^A-Za-z0-9._-]+/g, "-");
+}
+
 function setArchiveField(text, key, value) {
   const re = new RegExp(`^(\\s*)${key}:.*$`, "m");
+  if (!re.test(text)) throw new Error(`write-back target missing: ${key}`);
   return text.replace(re, `$1${key}: "${value}"`);
 }
 
@@ -167,6 +183,13 @@ async function processEntry(file) {
   if (!ARCHIVABLE_KINDS.has(entry.kind)) return { slug, skipped: "kind" };
   if (entry.status !== "live") return { slug, skipped: "not-live" };
   if (entry.archive?.ia_item) return { slug, skipped: "already-archived" };
+  if (!hasWritebackKeys(text)) {
+    console.error(
+      `FAILED     ${slug}: missing archive block fields — add the archive: ` +
+        `block before this entry can be packaged (nothing was published)`,
+    );
+    return { slug, failed: true };
+  }
 
   const title = langText(entry.title, slug);
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), `aj-${slug}-`));
@@ -176,7 +199,7 @@ async function processEntry(file) {
     const files = fs.readdirSync(outDir);
 
     const datestamp = cap.captured_at.slice(0, 10).replaceAll("-", "");
-    const identifier = `${TEST ? "test-" : ""}aandolanjeevi-${slug}-${datestamp}`;
+    const identifier = `${TEST ? "test-" : ""}aandolanjeevi-${iaSafe(slug)}-${datestamp}`;
     console.log(`uploading  ${slug} -> IA ${identifier}`);
     const iaUrl = await iaUpload(identifier, outDir, files, {
       title,
