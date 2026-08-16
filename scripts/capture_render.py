@@ -48,7 +48,7 @@ def run_crawl(url, workdir, timeout):
         CRAWLER_IMAGE,
         "crawl",
         "--url", url,
-        "--scopeType", "page",
+        "--scopeType", "page-spa",
         "--allowHashUrls",
         "--collection", "cap",
         "--behaviors", "autoscroll,autoplay,autofetch,siteSpecific",
