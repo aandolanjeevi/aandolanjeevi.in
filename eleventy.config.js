@@ -29,6 +29,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addGlobalData("locales", locales);
 
   // t: UI string lookup with English fallback. Usage: "nav.resources" | t(lang)
