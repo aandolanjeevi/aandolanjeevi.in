@@ -145,3 +145,24 @@ ul.entries, ul.post-list {
   font-size: 0.85rem;
   color: var(--muted);
 }
+
+/* Pagefind search UI — wire its theme variables to ours. */
+#search {
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--link);
+  --pagefind-ui-text: var(--fg);
+  --pagefind-ui-background: var(--bg);
+  --pagefind-ui-border: var(--line);
+  --pagefind-ui-tag: var(--line);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 4px;
+  --pagefind-ui-font: inherit;
+  margin-top: 1.5rem;
+}
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

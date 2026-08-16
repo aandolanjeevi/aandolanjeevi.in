@@ -69,3 +69,8 @@ submit:
 footer:
   license: Content licensed CC BY-NC-SA 4.0
   source: Source code
+search:
+  heading: Search
+  placeholder: Search resources and posts
+  noResults: No results for [SEARCH_TERM]
+  clear: Clear

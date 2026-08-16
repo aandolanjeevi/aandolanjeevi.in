@@ -69,3 +69,8 @@ submit:
 footer:
   license: सामग्री CC BY-NC-SA 4.0 के अंतर्गत
   source: सोर्स कोड
+search:
+  heading: खोज
+  placeholder: संसाधन और पोस्ट खोजें
+  noResults: "[SEARCH_TERM] के लिए कोई परिणाम नहीं"
+  clear: साफ़ करें

@@ -5,7 +5,30 @@ pagination:
   size: 1
   alias: lang
 permalink: "/{{ lang }}/index.html"
+searchable: true
 ---
+{# Pagefind classic UI — deprecated in 1.5 in favor of the Component UI but
+   still shipped and stable; migrate when we next touch search. #}
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+<section id="search-section">
+  <h2 class="visually-hidden">{{ "search.heading" | t(lang) }}</h2>
+  <div id="search"></div>
+</section>
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: false,
+      showImages: false,
+      translations: {
+        placeholder: {{ ("search.placeholder" | t(lang)) | dump | safe }},
+        zero_results: {{ ("search.noResults" | t(lang)) | dump | safe }},
+        clear_search: {{ ("search.clear" | t(lang)) | dump | safe }}
+      }
+    });
+  });
+</script>
 <p class="tagline">{{ "tagline" | t(lang) }}</p>
 
 <section id="resources">
