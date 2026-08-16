@@ -42,6 +42,7 @@ kind: guide             # article | pdf | guide | video | post | app | form | ma
 added: 2026-07-25
 status: live
 # paywalled: true        # optional — labels entries behind a hard paywall
+# render: true           # optional — archive via headless browser (for JS-only pages)
 archive:
   wayback: null
   ia_item: null

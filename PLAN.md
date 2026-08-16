@@ -108,14 +108,13 @@ if the source disappears.
   "contribute translations" section in CONTRIBUTING. Text displayed outside
   its source language carries a visible "(translated from …)" marker.
   _Depends on: M1, M4._
-- **M12 (P2) — Browser-based capture for client-side-rendered pages.** The
-  static capture (`capture.py`) gets only the HTML shell of JS-rendered pages
-  (SPAs, X/Instagram posts). Add a headless-browser capture path
-  (browsertrix-crawler in CI, or single-file as a lighter fallback) that
-  records rendered content and runtime requests into the WARC. Per-entry
-  `render: true` flag; `kind: post` routes through it automatically. Until
-  then the Wayback layer (browser-based at IA's end) is the effective copy
-  for CSR pages. _Depends on: M8._
+- **M12 (P2) — Browser-based capture for client-side-rendered pages.
+  🔨 BUILT.** `scripts/capture_render.py` runs browsertrix-crawler (headless
+  Chrome in Docker, CI-only — records rendered content and runtime requests
+  into the WARC, same package contract as static capture). Entries opt in
+  with `render: true`; `kind: post` renders automatically. The packages
+  workflow gained a `test` dispatch input for safe end-to-end CI runs.
+  _Depends on: M8._
 - **M13 (P2) — Video capture via yt-dlp.** `kind: video` currently captures
   only the page around the player. Fetch the media itself with yt-dlp into
   the package (size-capped; IA handles large files, Zenodo record links the

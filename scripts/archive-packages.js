@@ -50,12 +50,21 @@ const ZENODO_TOKEN = need("ZENODO_TOKEN");
 const langText = (map, fallback = "") =>
   typeof map === "string" ? map : map ? Object.values(map)[0] : fallback;
 
-function capture(url, title, outDir) {
+// render=true routes through the headless-browser capture (M12): required
+// for pages whose content only exists after JS runs. Entries opt in with
+// `render: true`; `kind: post` always renders (social pages are all CSR).
+function capture(url, title, outDir, render) {
+  const script = render ? "capture_render.py" : "capture.py";
   const result = execFileSync(
     PYTHON,
-    [path.join("scripts", "capture.py"), "--url", url, "--out", outDir,
+    [path.join("scripts", script), "--url", url, "--out", outDir,
      "--title", title],
-    { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] },
+    {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "inherit"],
+      timeout: (render ? 15 : 3) * 60 * 1000,
+      maxBuffer: 16 * 1024 * 1024,
+    },
   );
   return JSON.parse(result);
 }
@@ -192,10 +201,11 @@ async function processEntry(file) {
   }
 
   const title = langText(entry.title, slug);
+  const needsRender = entry.render === true || entry.kind === "post";
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), `aj-${slug}-`));
   try {
-    console.log(`capturing  ${slug} <- ${entry.url}`);
-    const cap = capture(entry.url, title, outDir);
+    console.log(`capturing  ${slug} <- ${entry.url}${needsRender ? "  [render]" : ""}`);
+    const cap = capture(entry.url, title, outDir, needsRender);
     const files = fs.readdirSync(outDir);
 
     const datestamp = cap.captured_at.slice(0, 10).replaceAll("-", "");
