@@ -5,7 +5,7 @@
   "description": "Resource repository for public protests — links, guides, and archives.",
   "type": "module",
   "scripts": {
-    "build": "eleventy",
+    "build": "eleventy && pagefind --site _site",
     "serve": "eleventy --serve",
     "archive": "node scripts/archive-wayback.js",
     "archive-packages": "node --env-file=.env scripts/archive-packages.js",
@@ -15,6 +15,7 @@
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "pagefind": "^1.3.0",
     "@11ty/eleventy-plugin-rss": "^2.0.0",
     "js-yaml": "^4.1.0"
   }

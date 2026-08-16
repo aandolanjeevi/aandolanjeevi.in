@@ -69,3 +69,10 @@ submit:
 footer:
   license: सामग्री CC BY-NC-SA 4.0 के अंतर्गत
   source: सोर्स कोड
+search:
+  searchLabel: संसाधन और पोस्ट खोजें
+  placeholder: संसाधन और पोस्ट खोजें
+  searching: "[SEARCH_TERM] खोजा जा रहा है..."
+  zeroResults: "[SEARCH_TERM] के लिए कोई परिणाम नहीं"
+  oneResult: "[SEARCH_TERM] के लिए [COUNT] परिणाम"
+  manyResults: "[SEARCH_TERM] के लिए [COUNT] परिणाम"

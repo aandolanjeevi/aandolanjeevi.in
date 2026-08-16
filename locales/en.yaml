@@ -69,3 +69,10 @@ submit:
 footer:
   license: Content licensed CC BY-NC-SA 4.0
   source: Source code
+search:
+  searchLabel: Search resources and posts
+  placeholder: Search resources and posts
+  searching: Searching for [SEARCH_TERM]...
+  zeroResults: No results for [SEARCH_TERM]
+  oneResult: "[COUNT] result for [SEARCH_TERM]"
+  manyResults: "[COUNT] results for [SEARCH_TERM]"

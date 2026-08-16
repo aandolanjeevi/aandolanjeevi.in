@@ -5,7 +5,65 @@ pagination:
   size: 1
   alias: lang
 permalink: "/{{ lang }}/index.html"
+searchable: true
 ---
+{# Search: our own minimal UI over Pagefind's documented core JS API
+   (/pagefind/pagefind.js). Deliberately no UI package — both bundled UIs
+   lack Indic translations and the maintained one has no public override API
+   (as of 1.5.2), so we render results ourselves and every string comes from
+   the locale files. The core engine picks the right per-language index from
+   this page's html lang attribute. #}
+<section id="search-section">
+  <label for="search-input" class="visually-hidden">{{ "search.searchLabel" | t(lang) }}</label>
+  <input id="search-input" type="search" autocomplete="off"
+         placeholder="{{ "search.placeholder" | t(lang) }}">
+  <p id="search-status" role="status" aria-live="polite"></p>
+  <ol id="search-results" class="search-results"></ol>
+</section>
+<script type="module">
+  const strings = {
+    searching: {{ ("search.searching" | t(lang)) | dump | safe }},
+    zero: {{ ("search.zeroResults" | t(lang)) | dump | safe }},
+    one: {{ ("search.oneResult" | t(lang)) | dump | safe }},
+    many: {{ ("search.manyResults" | t(lang)) | dump | safe }}
+  };
+  const fill = (tpl, term, count) =>
+    tpl.replaceAll("[SEARCH_TERM]", term).replaceAll("[COUNT]", count);
+
+  const input = document.getElementById("search-input");
+  const status = document.getElementById("search-status");
+  const list = document.getElementById("search-results");
+  let pagefind;
+
+  input.addEventListener("input", async () => {
+    const term = input.value.trim();
+    if (!term) { list.replaceChildren(); status.textContent = ""; return; }
+    pagefind ??= await import("/pagefind/pagefind.js");
+    status.textContent = fill(strings.searching, term, "");
+    const search = await pagefind.debouncedSearch(term);
+    if (search === null) return; // superseded by newer keystrokes
+    const results = await Promise.all(
+      search.results.slice(0, 10).map((r) => r.data()),
+    );
+    list.replaceChildren(...results.map((r) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = r.url;
+      a.textContent = r.meta.title || r.url;
+      const p = document.createElement("p");
+      p.innerHTML = r.excerpt; // our own indexed content; <mark> highlights
+      li.append(a, p);
+      return li;
+    }));
+    status.textContent = fill(
+      search.results.length === 1 ? strings.one : strings.many,
+      term, String(search.results.length),
+    );
+    if (search.results.length === 0) {
+      status.textContent = fill(strings.zero, term, "0");
+    }
+  });
+</script>
 <p class="tagline">{{ "tagline" | t(lang) }}</p>
 
 <section id="resources">
