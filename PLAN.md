@@ -152,8 +152,12 @@ if the source disappears.
 - **G3 (P2) — Hosted translation platform.** Weblate (free for libre
   projects) or similar wired to the locale files, so translators never need
   GitHub at all. _Depends on: M10._
-- **G4 (P2) — Archive refresh.** Scheduled re-capture of changed pages;
-  commit/update only on diff. _Depends on: M8._
+- **G4 (P2) — Archive refresh. ✅ DONE.** Monthly re-capture of packages
+  older than 60 days (`scripts/archive-refresh.js`); diff via IA's per-file
+  SHA1 so unchanged pages cost one capture and nothing else. A real change
+  adds dated files to the same IA item and publishes a new version of the
+  existing Zenodo record (same concept DOI — no record sprawl). Video kinds
+  excluded (media immutable). _Depends on: M8._
 - **G5 (P3) — Public index export.** Machine-readable JSON/CSV of the full
   index so others can mirror or build on it. _Depends on: M1._
 - **G6 (P3) — Decap CMS.** Web editing UI for non-technical admins (posts and

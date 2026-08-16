@@ -1,0 +1,64 @@
+name: Refresh archives (changed pages)
+
+# Monthly re-capture of stale packages; uploads only when the page actually
+# changed (dated files into the same IA item + a new version of the existing
+# Zenodo record). See scripts/archive-refresh.js and PLAN.md G4.
+on:
+  schedule:
+    - cron: "51 2 1 * *" # 1st of the month, 02:51 UTC
+  workflow_dispatch:
+    inputs:
+      check_only:
+        description: "Report what would refresh without uploading anything"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: archive-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: pip install -r scripts/requirements.txt
+      - name: Refresh changed pages
+        run: node scripts/archive-refresh.js ${{ inputs.check_only && '--check-only' || '' }}
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+      - name: Open and auto-merge PR for refreshed metadata
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ -z "$(git status --porcelain resources)" ]]; then
+            echo "No refreshes to record."; exit 0
+          fi
+          branch="bot/refresh-${GITHUB_RUN_ID}"
+          git config user.name "aandolanjeevi-bot"
+          git config user.email "bot@aandolanjeevi.in"
+          git checkout -b "$branch"
+          git add resources
+          git commit -m "chore: record refreshed archive packages"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore: record refreshed archive packages" \
+            --body "Automated archive refresh metadata (new Zenodo version DOIs, hashes, capture dates). Auto-merged."
+          for i in 1 2 3 4 5; do
+            gh pr merge "$branch" --squash --delete-branch && break
+            sleep 5
+          done
