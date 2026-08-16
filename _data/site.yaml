@@ -25,4 +25,4 @@ turnstileSiteKey: "0x4AAAAAAERYjMyAIqVvT1hj"
 # GoatCounter site code (https://<code>.goatcounter.com). Empty = no
 # analytics at all. count.js is self-hosted (js/count.js); only the count
 # beacon goes to GoatCounter. Never Google Analytics — see PLAN.md G8.
-goatcounter: ""
+goatcounter: "aandolanjeevi"

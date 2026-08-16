@@ -57,6 +57,14 @@ identity. Submissions enter a review queue as bot-authored issues; the
 submitter is not recorded anywhere. GitHub users who choose to file an issue
 directly do so under their own account, visibly.
 
+## Analytics
+
+We use [GoatCounter](https://www.goatcounter.com) for aggregate, cookie-less
+visit counts: no cookies, no IP addresses stored, no personal data, no
+cross-site tracking, and the dashboard is private. The counting script is
+served from this site, not a third party. That is the entirety of the
+analytics; there is no other tracking of any kind.
+
 ## Takedown requests
 
 To request removal or correction of a listing or an archived copy, write to

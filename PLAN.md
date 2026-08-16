@@ -168,7 +168,7 @@ if the source disappears.
   screenshots for `app|form|map|source` entries (browsertrix `--screenshot`,
   extracted from the WARC, webp in `assets/screenshots/`), written to
   `archive.screenshot` and linked from each entry. _Depends on: M2, M8._
-- **G8 (P3) — Privacy-respecting analytics. 🔨 WIRED, awaiting account.**
+- **G8 (P3) — Privacy-respecting analytics. ✅ DONE.**
   GoatCounter behind an empty-by-default `goatcounter` key in
   `_data/site.yaml` (no markup at all until set); `count.js` self-hosted so
   no third-party script loads — only the count beacon reaches GoatCounter.
