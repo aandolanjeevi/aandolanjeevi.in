@@ -146,19 +146,24 @@ ul.entries, ul.post-list {
   color: var(--muted);
 }
 
-/* Pagefind search UI — wire its theme variables to ours. */
-#search {
-  --pagefind-ui-scale: 0.9;
-  --pagefind-ui-primary: var(--link);
-  --pagefind-ui-text: var(--fg);
-  --pagefind-ui-background: var(--bg);
-  --pagefind-ui-border: var(--line);
-  --pagefind-ui-tag: var(--line);
-  --pagefind-ui-border-width: 1px;
-  --pagefind-ui-border-radius: 4px;
-  --pagefind-ui-font: inherit;
-  margin-top: 1.5rem;
+/* Search (our own minimal UI over the Pagefind core API). */
+#search-section { margin-top: 1.5rem; }
+#search-input {
+  width: 100%;
+  max-width: 32rem;
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
 }
+#search-status { color: var(--muted); font-size: 0.85rem; min-height: 1.2em; }
+.search-results { list-style: none; padding: 0; max-width: 32rem; }
+.search-results li { margin-bottom: 0.9rem; }
+.search-results a { font-weight: 600; }
+.search-results p { margin: 0.15rem 0; font-size: 0.9rem; }
+.search-results mark { background: var(--link); color: var(--bg); border-radius: 2px; padding: 0 2px; }
 .visually-hidden {
   position: absolute;
   left: -9999px;

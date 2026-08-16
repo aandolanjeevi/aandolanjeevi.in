@@ -70,16 +70,9 @@ footer:
   license: सामग्री CC BY-NC-SA 4.0 के अंतर्गत
   source: सोर्स कोड
 search:
-  heading: खोज
+  searchLabel: संसाधन और पोस्ट खोजें
   placeholder: संसाधन और पोस्ट खोजें
-  noResults: "[SEARCH_TERM] के लिए कोई परिणाम नहीं"
-  clear: साफ़ करें
-  searchLabel: इस साइट पर खोजें
-  filtersLabel: फ़िल्टर
-  zeroResults: "[SEARCH_TERM] के लिए कोई परिणाम नहीं"
-  manyResults: "[SEARCH_TERM] के लिए [COUNT] परिणाम"
-  oneResult: "[SEARCH_TERM] के लिए [COUNT] परिणाम"
-  altSearch: "[SEARCH_TERM] के लिए कोई परिणाम नहीं। इसके बजाय [DIFFERENT_TERM] के परिणाम दिखाए जा रहे हैं"
-  searchSuggestion: "[SEARCH_TERM] के लिए कोई परिणाम नहीं। ये खोजें आज़माएँ:"
   searching: "[SEARCH_TERM] खोजा जा रहा है..."
-  loadMore: और परिणाम देखें
+  zeroResults: "[SEARCH_TERM] के लिए कोई परिणाम नहीं"
+  oneResult: "[SEARCH_TERM] के लिए [COUNT] परिणाम"
+  manyResults: "[SEARCH_TERM] के लिए [COUNT] परिणाम"

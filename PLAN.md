@@ -143,10 +143,12 @@ if the source disappears.
   parses both submission formats, validates category/kind against the
   taxonomy, and opens a review PR (deliberately not auto-merged — a human
   checks language/category/translations; merge deploys). _Depends on: M6._
-- **G2 (P2) — Client-side search. ✅ DONE.** Pagefind runs after each build
-  and indexes opted-in pages (home + posts; submit pages excluded), split per
-  language automatically via each page's `lang` attribute. Self-hosted UI on
-  the home pages with localized strings. _Depends on: M1._
+- **G2 (P2) — Client-side search. ✅ DONE.** Pagefind (core engine only —
+  actively maintained; no deprecated UI package) runs after each build and
+  indexes opted-in pages (home + posts; submit pages excluded), split per
+  language via each page's `lang` attribute. Results rendered by our own
+  ~50-line UI over the documented core JS API, all strings from the locale
+  files. _Depends on: M1._
 - **G3 (P2) — Hosted translation platform.** Weblate (free for libre
   projects) or similar wired to the locale files, so translators never need
   GitHub at all. _Depends on: M10._
