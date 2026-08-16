@@ -14,8 +14,8 @@ added: 2026-08-05
 status: live
 archive:
   wayback: "https://web.archive.org/web/20260814035040/https://cryptpad.fr/pad/"
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
+  ia_item: "https://archive.org/details/aandolanjeevi-farmer-protest-2021-india-20260814"
+  zenodo_doi: "10.5281/zenodo.21927762"
+  sha256: "1fb0c64a171d1e2b97b40d27d1b429c391566f33761130a3124618e317ea9b37"
   captured_at: "2026-08-14"
   screenshot: null
