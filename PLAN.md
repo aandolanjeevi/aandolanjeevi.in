@@ -158,8 +158,10 @@ if the source disappears.
   adds dated files to the same IA item and publishes a new version of the
   existing Zenodo record (same concept DOI — no record sprawl). Video kinds
   excluded (media immutable). _Depends on: M8._
-- **G5 (P3) — Public index export.** Machine-readable JSON/CSV of the full
-  index so others can mirror or build on it. _Depends on: M1._
+- **G5 (P3) — Public index export. ✅ DONE.** `/index.json` and `/index.csv`
+  built from the same data the site renders — every entry with archive
+  identifiers and package hash; linked in the footer and README.
+  _Depends on: M1._
 - **G6 (P3) — Decap CMS.** Web editing UI for non-technical admins (posts and
   entries) committing straight to the repo. _Depends on: M1._
 - **G7 (P3) — Screenshots for interactive apps.** Periodic screenshot capture

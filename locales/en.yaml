@@ -69,6 +69,7 @@ submit:
 footer:
   license: Content licensed CC BY-NC-SA 4.0
   source: Source code
+  data: Data (JSON)
 search:
   searchLabel: Search resources and posts
   placeholder: Search resources and posts
