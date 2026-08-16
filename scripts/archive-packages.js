@@ -50,11 +50,24 @@ const ZENODO_TOKEN = need("ZENODO_TOKEN");
 const langText = (map, fallback = "") =>
   typeof map === "string" ? map : map ? Object.values(map)[0] : fallback;
 
-// render=true routes through the headless-browser capture (M12): required
-// for pages whose content only exists after JS runs. Entries opt in with
-// `render: true`; `kind: post` always renders (social pages are all CSR).
-function capture(url, title, outDir, render) {
-  const script = render ? "capture_render.py" : "capture.py";
+// Capture mode per entry (M12/M13):
+//   video  — kind: video; yt-dlp fetches the media itself
+//   render — render: true or kind: post; headless browser records JS-only pages
+//   static — everything else
+function captureMode(entry) {
+  if (entry.kind === "video") return "video";
+  if (entry.render === true || entry.kind === "post") return "render";
+  return "static";
+}
+
+const CAPTURE = {
+  video: { script: "capture_video.py", minutes: 30 },
+  render: { script: "capture_render.py", minutes: 15 },
+  static: { script: "capture.py", minutes: 3 },
+};
+
+function capture(url, title, outDir, mode) {
+  const { script, minutes } = CAPTURE[mode];
   const result = execFileSync(
     PYTHON,
     [path.join("scripts", script), "--url", url, "--out", outDir,
@@ -62,7 +75,7 @@ function capture(url, title, outDir, render) {
     {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "inherit"],
-      timeout: (render ? 15 : 3) * 60 * 1000,
+      timeout: minutes * 60 * 1000,
       maxBuffer: 16 * 1024 * 1024,
     },
   );
@@ -201,11 +214,11 @@ async function processEntry(file) {
   }
 
   const title = langText(entry.title, slug);
-  const needsRender = entry.render === true || entry.kind === "post";
+  const mode = captureMode(entry);
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), `aj-${slug}-`));
   try {
-    console.log(`capturing  ${slug} <- ${entry.url}${needsRender ? "  [render]" : ""}`);
-    const cap = capture(entry.url, title, outDir, needsRender);
+    console.log(`capturing  ${slug} <- ${entry.url}${mode !== "static" ? `  [${mode}]` : ""}`);
+    const cap = capture(entry.url, title, outDir, mode);
     const files = fs.readdirSync(outDir);
 
     const datestamp = cap.captured_at.slice(0, 10).replaceAll("-", "");

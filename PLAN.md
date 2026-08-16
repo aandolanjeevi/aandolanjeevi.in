@@ -115,10 +115,11 @@ if the source disappears.
   with `render: true`; `kind: post` renders automatically. The packages
   workflow gained a `test` dispatch input for safe end-to-end CI runs.
   _Depends on: M8._
-- **M13 (P2) — Video capture via yt-dlp.** `kind: video` currently captures
-  only the page around the player. Fetch the media itself with yt-dlp into
-  the package (size-capped; IA handles large files, Zenodo record links the
-  IA copy if over its limits). _Depends on: M8._
+- **M13 (P2) — Video capture via yt-dlp. 🔨 BUILT.** `scripts/capture_video.py`
+  fetches the media itself (<=720p, 2GB cap) plus metadata and thumbnail for
+  `kind: video` entries — same package contract, routed automatically by the
+  orchestrator. Caveat: video hosts may bot-block CI datacenter IPs; when that
+  happens, run `npm run archive-packages` locally instead. _Depends on: M8._
 - **M11 (P3) — Policies + maintainer runbook.** Content inclusion policy, PII
   /minors rules, copyright posture (Wayback links for news articles;
   self-hosted/IA copies for guides and redistribution-friendly material),
