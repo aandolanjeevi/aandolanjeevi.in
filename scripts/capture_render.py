@@ -43,6 +43,7 @@ CRAWLER_IMAGE = "webrecorder/browsertrix-crawler:1.5.4"
 def run_crawl(url, workdir, timeout):
     cmd = [
         "docker", "run", "--rm",
+        "--shm-size=1g",
         "-v", f"{workdir}:/crawls",
         CRAWLER_IMAGE,
         "crawl",
@@ -116,8 +117,11 @@ def main():
         if not warcs:
             for root, _dirs, files in os.walk(workdir):
                 for f in files:
-                    print("workdir file:", os.path.join(root, f),
-                          file=sys.stderr)
+                    p = os.path.join(root, f)
+                    print("workdir file:", p, file=sys.stderr)
+                    if f.endswith(".log"):
+                        lines = open(p, errors="replace").readlines()
+                        sys.stderr.writelines(lines[-40:])
             print("render capture failed: crawler produced no WARCs",
                   file=sys.stderr)
             sys.exit(2)
