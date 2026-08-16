@@ -1,0 +1,16 @@
+# TEMPORARY test entry for M13 CI validation — do not merge.
+url: "https://www.youtube.com/watch?v=YE7VzlLtp-4"
+title:
+  en: Video-capture test (Big Buck Bunny, CC)
+language: en
+category: news-media
+kind: video
+added: 2026-08-16
+status: live
+archive:
+  wayback: null
+  ia_item: null
+  zenodo_doi: null
+  sha256: null
+  captured_at: null
+  screenshot: null
