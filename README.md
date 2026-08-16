@@ -69,6 +69,14 @@ For a language in another script (Tamil, Bengali, Telugu, …), also add its
 Noto family/subset to `FAMILIES` in `scripts/fetch-fonts.js` and re-run
 `npm run fonts` to vendor the glyphs.
 
+## Mirroring the data
+
+The full index is published machine-readably at
+[`/index.json`](https://aandolanjeevi.in/index.json) and
+[`/index.csv`](https://aandolanjeevi.in/index.csv) — every entry with its
+archive identifiers (Wayback URL, Internet Archive item, Zenodo DOI) and the
+package SHA-256, so any copy can be verified. Mirror freely (CC BY-NC-SA 4.0).
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md). By participating you agree to the
