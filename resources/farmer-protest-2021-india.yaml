@@ -10,12 +10,16 @@ description:
 language: en
 category: news-media
 kind: guide
+render: true
 added: 2026-08-05
 status: live
+# Superseded shell-only package (static capture of a JS-only page, 2026-08-14):
+#   https://archive.org/details/aandolanjeevi-farmer-protest-2021-india-20260814
+#   DOI 10.5281/zenodo.21927762 (permanent; kept as historical record)
 archive:
   wayback: "https://web.archive.org/web/20260814035040/https://cryptpad.fr/pad/"
-  ia_item: "https://archive.org/details/aandolanjeevi-farmer-protest-2021-india-20260814"
-  zenodo_doi: "10.5281/zenodo.21927762"
-  sha256: "1fb0c64a171d1e2b97b40d27d1b429c391566f33761130a3124618e317ea9b37"
+  ia_item: null
+  zenodo_doi: null
+  sha256: null
   captured_at: "2026-08-14"
   screenshot: null
