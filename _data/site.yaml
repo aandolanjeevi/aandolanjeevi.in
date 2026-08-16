@@ -13,7 +13,9 @@ categories:
   - aid-support
 kinds:
   archivable: [article, pdf, guide, video, post]
-  interactive: [app, form, map]
+  # Link + screenshot + Wayback only — no WARC packaging. `source` is a living
+  # source: an org's website or social presence (YouTube/Instagram/Telegram).
+  interactive: [app, form, map, source]
 repo: https://github.com/aandolanjeevi/aandolanjeevi.in
 # Submission Worker endpoint (M6). Empty until the Worker is deployed; while
 # empty the submit page falls back to the GitHub-issue link.

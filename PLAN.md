@@ -21,10 +21,12 @@ if the source disappears.
   text is shown in a language other than the entry's own, the UI clearly
   marks it — e.g. "(translated from Hindi)".
 - **Classification:** human-set `kind` field at submission time
-  (`article | pdf | guide | video | post | app | form | map`),
+  (`article | pdf | guide | video | post | app | form | map | source`),
   script-assisted suggestions only. `article|pdf|guide|video|post` go through
   the full archive pipeline (video via yt-dlp — large captures accepted);
-  `app|form|map` get link + screenshot.
+  `app|form|map|source` get link + screenshot. `source` = a living source:
+  an org's website or social presence (YouTube/Instagram/X/Telegram page)
+  whose value is ongoing, not a single document.
 - **Archival:** offload archive bytes to the Internet Archive; the repo keeps
   only the index and metadata. WARC capture packages (page + media + manifest)
   are uploaded as IA items. Backup custody (in case IA items are ever taken
@@ -55,7 +57,7 @@ if the source disappears.
 - **M1 (P1) — Scaffold the 11ty site. ✅ DONE.** Link index rendered from data
   files, grouped by category with kind/language badges. _Depends on: M2._
 - **M2 (P1) — Taxonomy + schema. DECIDED.** Kinds:
-  `article | pdf | guide | video | post | app | form | map`. Categories: the
+  `article | pdf | guide | video | post | app | form | map | source`. Categories: the
   six above. Schema: one YAML file per entry (filename = slug) with `url`,
   language-keyed `title`/`description`, `language`, `category`, `kind`,
   `added`, `status` (`live|dead`), optional `paywalled: true` (labels the

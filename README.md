@@ -38,7 +38,7 @@ description:
   en: One-paragraph summary.
 language: en            # language of the resource itself
 category: legal         # legal | safety-health | digital-security | news-media | organizing | aid-support
-kind: guide             # article | pdf | guide | video | post | app | form | map
+kind: guide             # article | pdf | guide | video | post | app | form | map | source
 added: 2026-07-25
 status: live
 # paywalled: true        # optional — labels entries behind a hard paywall
