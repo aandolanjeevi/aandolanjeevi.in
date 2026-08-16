@@ -1,0 +1,65 @@
+name: Submission to entry (approved)
+
+# When a maintainer adds the `approved` label to a `submission` issue, draft
+# the resource entry and open a PR for human review. The PR is deliberately
+# NOT auto-merged: submissions are content — a maintainer checks language,
+# category, and translations before merging. PLAN.md G1.
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: submission-entry-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  entry:
+    if: >
+      github.event.label.name == 'approved' &&
+      contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Draft the entry file
+        id: draft
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          file=$(node scripts/issue-to-entry.js)
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+      - name: Open review PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FILE: ${{ steps.draft.outputs.file }}
+          N: ${{ github.event.issue.number }}
+        run: |
+          branch="bot/entry-${N}"
+          git config user.name "aandolanjeevi-bot"
+          git config user.email "bot@aandolanjeevi.in"
+          git checkout -b "$branch"
+          git add "$FILE"
+          git commit -m "feat: add entry from submission #${N}"
+          git push origin "$branch"
+          pr_url=$(gh pr create --base main --head "$branch" \
+            --title "feat: add entry from submission #${N}" \
+            --body "Drafted from approved submission #${N} (\`$FILE\`).
+
+**Review before merging:**
+- [ ] \`language\` is correct (defaulted to \`en\`)
+- [ ] \`category\` is set and right (unset = entry won't render)
+- [ ] \`kind\` is right (paywalled? \`render: true\` needed?)
+- [ ] title/description translations added where possible
+
+Closes #${N}")
+          gh issue comment "$N" --body "Entry drafted for review: $pr_url"
