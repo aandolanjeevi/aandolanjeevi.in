@@ -43,6 +43,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           FILE: ${{ steps.draft.outputs.file }}
           N: ${{ github.event.issue.number }}
+          PR_CHECKLIST: |
+            **Review before merging:**
+            - [ ] `language` is correct (defaulted to `en`)
+            - [ ] `category` is set and right (unset = entry won't render)
+            - [ ] `kind` is right (paywalled? `render: true` needed?)
+            - [ ] title/description translations added where possible
+
+            Closes #${{ github.event.issue.number }}
         run: |
           branch="bot/entry-${N}"
           git config user.name "aandolanjeevi-bot"
@@ -51,15 +59,8 @@ jobs:
           git add "$FILE"
           git commit -m "feat: add entry from submission #${N}"
           git push origin "$branch"
+          body=$(printf 'Drafted from approved submission #%s (`%s`).\n\n%s' "$N" "$FILE" "$PR_CHECKLIST")
           pr_url=$(gh pr create --base main --head "$branch" \
             --title "feat: add entry from submission #${N}" \
-            --body "Drafted from approved submission #${N} (\`$FILE\`).
-
-**Review before merging:**
-- [ ] \`language\` is correct (defaulted to \`en\`)
-- [ ] \`category\` is set and right (unset = entry won't render)
-- [ ] \`kind\` is right (paywalled? \`render: true\` needed?)
-- [ ] title/description translations added where possible
-
-Closes #${N}")
+            --body "$body")
           gh issue comment "$N" --body "Entry drafted for review: $pr_url"
