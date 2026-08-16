@@ -18,8 +18,8 @@ added: 2026-08-05
 status: live
 archive:
   wayback: "https://web.archive.org/web/20260727050110/https://www.deccanherald.com/india/karnataka/bengaluru/police-cant-use-lathi-arbitrarily-protesting-know-your-rights-4082356"
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
-  captured_at: "2026-07-27"
+  ia_item: "https://archive.org/details/aandolanjeevi-protest-rights-india-2026-01-20260816"
+  zenodo_doi: "10.5281/zenodo.21961633"
+  sha256: "e1e0db42c8769f1f21c1ce6143cebfdae569d27a456980597cc9ff459ed2979e"
+  captured_at: "2026-08-16"
   screenshot: null

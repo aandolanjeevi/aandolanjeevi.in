@@ -18,8 +18,8 @@ added: 2026-08-05
 status: live
 archive:
   wayback: "https://web.archive.org/web/20260816043151/https://www.thehindu.com/news/national/the-right-to-protest-and-the-limits-of-police-power-explained/article71258006.ece"
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
+  ia_item: "https://archive.org/details/aandolanjeevi-protest-rights-india-2026-02-20260816"
+  zenodo_doi: "10.5281/zenodo.21961641"
+  sha256: "f9cbbb3326e399fe7cec88e79c946bcfecd570fd78c784ba0491e4759ef8a31d"
   captured_at: "2026-08-16"
   screenshot: null
