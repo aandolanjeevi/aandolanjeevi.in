@@ -19,6 +19,6 @@ kinds:
 repo: https://github.com/aandolanjeevi/aandolanjeevi.in
 # Submission Worker endpoint (M6). Empty until the Worker is deployed; while
 # empty the submit page falls back to the GitHub-issue link.
-submitEndpoint: ""
+submitEndpoint: "https://aandolanjeevi-submit.github-e58.workers.dev"
 # Cloudflare Turnstile site key for spam protection. Empty = widget hidden.
-turnstileSiteKey: ""
+turnstileSiteKey: "0x4AAAAAAERYjMyAIqVvT1hj"

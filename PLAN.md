@@ -72,7 +72,7 @@ if the source disappears.
   _Depends on: M1._
 - **M5 (P2) — Admin posts. ✅ DONE.** Markdown post collection + Atom feed.
   _Depends on: M1._
-- **M6 (P2) — Anonymous submission path. 🔨 BUILT, awaiting deploy.** Static
+- **M6 (P2) — Anonymous submission path. ✅ DONE.** Static
   form (`pages/submit.njk`, fields: url, title, category, kind, why) posting to
   a Cloudflare Worker (`workers/submit-worker/`) that files a bot-authored
   GitHub issue — no GitHub account needed, no submitter identity recorded.
