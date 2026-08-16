@@ -28,6 +28,10 @@
   <main{% if searchable %} data-pagefind-body{% endif %}>
     {{ content | safe }}
   </main>
+  {%- if site.goatcounter %}
+  <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count"
+          async src="/js/count.js"></script>
+  {%- endif %}
   <footer class="site-footer">
     <p>{{ "footer.license" | t(lang) }} · <a href="{{ site.repo }}">{{ "footer.source" | t(lang) }}</a> · <a href="/index.json">{{ "footer.data" | t(lang) }}</a></p>
   </footer>

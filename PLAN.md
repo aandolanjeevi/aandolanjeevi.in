@@ -168,8 +168,12 @@ if the source disappears.
   screenshots for `app|form|map|source` entries (browsertrix `--screenshot`,
   extracted from the WARC, webp in `assets/screenshots/`), written to
   `archive.screenshot` and linked from each entry. _Depends on: M2, M8._
-- **G8 (P3) — Privacy-respecting analytics.** GoatCounter or none at all;
-  never Google Analytics on a protest site. _Depends on: M3._
+- **G8 (P3) — Privacy-respecting analytics. 🔨 WIRED, awaiting account.**
+  GoatCounter behind an empty-by-default `goatcounter` key in
+  `_data/site.yaml` (no markup at all until set); `count.js` self-hosted so
+  no third-party script loads — only the count beacon reaches GoatCounter.
+  Never Google Analytics. **Your step:** create the account at
+  goatcounter.com and set the site code. _Depends on: M3._
 - **G9 (P3) — Repo mirror.** Automatic mirror to a second forge (e.g.
   Codeberg) so GitHub is not a single point of failure. _Depends on: —._
 
