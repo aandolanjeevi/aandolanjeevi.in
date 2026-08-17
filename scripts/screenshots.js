@@ -48,17 +48,21 @@ function processEntry(file) {
     return { slug, failed: true };
   }
 
-  const shotPath = path.join(SHOTS_DIR, `${slug}.webp`);
+  const shotPath = path.join(SHOTS_DIR, `${slug}.png`);
   try {
     console.log(`capturing  ${slug} <- ${entry.url}`);
-    execFileSync(
+    const out = execFileSync(
       PYTHON,
       [path.join("scripts", "capture_screenshot.py"),
        "--url", entry.url, "--out", shotPath],
-      { stdio: ["ignore", "inherit", "inherit"], timeout: 15 * 60 * 1000 },
+      { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"], timeout: 15 * 60 * 1000 },
     );
-    fs.writeFileSync(filePath, setArchiveField(text, "screenshot", `/${shotPath.replaceAll(path.sep, "/")}`));
-    return { slug, captured: shotPath };
+    // The script reports the path it actually wrote (webp, or png when
+    // ffmpeg is unavailable) — record that, never the requested path.
+    const written = out.trim().split("\n").at(-1);
+    if (!fs.existsSync(written)) throw new Error(`reported file missing: ${written}`);
+    fs.writeFileSync(filePath, setArchiveField(text, "screenshot", `/${written.replaceAll(path.sep, "/")}`));
+    return { slug, captured: written };
   } catch (err) {
     console.error(`FAILED     ${slug}: ${err.message}`);
     return { slug, failed: true };

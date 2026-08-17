@@ -3,7 +3,7 @@
 
 Runs browsertrix-crawler with --screenshot view (rendered viewport of the
 page, stored by the crawler as a WARC resource record), extracts the image,
-and writes it as webp (via ffmpeg; falls back to png when ffmpeg is absent).
+and writes it as png.
 
 Requires Docker. Exit code 2 on any failure.
 
@@ -87,20 +87,13 @@ def main():
         image, _ctype = extract_screenshot(warcs)
 
         os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-        raw = os.path.join(workdir, "shot.png")
-        with open(raw, "wb") as f:
+        # PNG always: webp needed an encoder (ffmpeg with libwebp) that is
+        # absent often enough — including on CI runners — that the format
+        # isn't worth the dependency. A png/webp mismatch here once broke
+        # every screenshot link on the site.
+        with open(args.out, "wb") as f:
             f.write(image)
-
-        if args.out.endswith(".webp") and shutil.which("ffmpeg"):
-            subprocess.run(
-                ["ffmpeg", "-y", "-loglevel", "error", "-i", raw,
-                 "-quality", "80", args.out],
-                check=True, timeout=120,
-            )
-        else:
-            # No ffmpeg (or non-webp target): ship the raw image as-is.
-            shutil.copyfile(raw, args.out if not args.out.endswith(".webp")
-                            else args.out[:-5] + ".png")
+        # Contract: stdout's last line is the path actually written.
         print(args.out)
     finally:
         shutil.rmtree(workdir, ignore_errors=True)
