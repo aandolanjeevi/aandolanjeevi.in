@@ -59,6 +59,28 @@ archive:
 Text shown outside its source language is automatically marked
 "(translated from …)".
 
+### When to set `render: true`
+
+The flag routes archival capture through a headless browser instead of a
+plain HTTP fetch. It only changes behavior on **archivable** kinds
+(`article`, `pdf`, `guide`; `kind: post` always renders, no flag needed).
+On interactive kinds (`app|form|map|source`) it's inert — they are never
+WARC-packaged, and screenshots always use a real browser — but it's welcome
+as documentation of the page's nature.
+
+How to decide:
+
+1. **The curl test:** `curl -sL <url> | sed 's/<[^>]*>/ /g'` — if the
+   *meaningful content* (article text, guide steps) is in the raw HTML,
+   static capture is fine. If you get page chrome around nothing, set
+   `render: true`.
+2. **Instant tells:** content addressed by a `#fragment` (CryptPad-style —
+   servers never see it), pages that skeleton-load before filling in,
+   notion/etherpad-like platforms, single-page apps generally.
+3. **When in doubt on an archivable kind, set it.** The cost is a slower
+   capture; the cost of missing it is a permanent archive of an empty shell
+   (see MAINTAINERS.md for the re-package procedure if that happens).
+
 ## Adding a language
 
 Copy `locales/en.yaml` to `locales/<code>.yaml`, translate the values, and add
