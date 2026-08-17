@@ -19,6 +19,7 @@ Built with [Eleventy](https://www.11ty.dev/). No other runtime required.
 | Path | What it is |
 |------|------------|
 | `resources/*.yaml` | One file per listed resource (the link index) |
+| `img/` | Brand assets (logo, favicon, social card) — generated, see [DESIGN.md](./DESIGN.md) |
 | `posts/*.md` | Admin posts |
 | `locales/*.yaml` | UI strings per language — translation contributions welcome |
 | `pages/` | Page templates (per-language via pagination) |
