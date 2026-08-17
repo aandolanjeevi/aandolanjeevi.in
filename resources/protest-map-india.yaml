@@ -1,0 +1,25 @@
+url: https://protest-map.free.gen.in/
+title:
+  en: "Protest Map — Track People's Protests Across India"
+  hi: "प्रोटेस्ट मैप — भारत भर के जन आंदोलनों पर नज़र रखें"
+description:
+  en: >-
+    A live tracker of people's protests happening across India — explore
+    demonstrations near you, see what communities are fighting for, and
+    submit or follow updates.
+  hi: >-
+    भारत भर में हो रहे जन आंदोलनों का लाइव ट्रैकर — अपने आस-पास के प्रदर्शन
+    देखें, जानें कि समुदाय किस लिए लड़ रहे हैं, और अपडेट भेजें या फ़ॉलो करें।
+language: en
+category: organizing
+kind: map
+render: true
+added: 2026-08-01
+status: live
+archive:
+  wayback: null
+  ia_item: null
+  zenodo_doi: null
+  sha256: null
+  captured_at: null
+  screenshot: null
