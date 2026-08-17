@@ -20,6 +20,11 @@ const jobs = [
   { src: "og-src.svg", out: "img/og.png", width: 1200 },
   { src: "touch-src.svg", out: "img/apple-touch-icon.png", width: 180 },
   { src: "fav-src.svg", out: "img/favicon-32.png", width: 32 },
+  // One-off GitHub uploads — land in the tmp dir, not the repo:
+  // social-preview.png → repo Settings → General → Social preview
+  // org-avatar.png     → org Settings → Profile → logo
+  { src: "social-src.svg", out: path.join(srcDir, "social-preview.png"), width: 1280 },
+  { src: "avatar-src.svg", out: path.join(srcDir, "org-avatar.png"), width: 1024 },
 ];
 
 for (const { src, out, width } of jobs) {

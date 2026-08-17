@@ -162,6 +162,11 @@ repo's own Noto Sans woff2 files, so no asset depends on any viewer font.
 | `img/apple-touch-icon.png` | 180×180, opaque paper ground |
 | `img/favicon-32.png` | PNG fallback for non-SVG-favicon browsers |
 
+Two GitHub-upload assets are generated into the tmp dir but **not committed**
+(they live in GitHub settings, not the site): `social-preview.png` (1280×640,
+the mark — repo Settings → General → Social preview) and `org-avatar.png`
+(1024×1024, the seal on paper — org Settings → Profile → logo).
+
 Regenerate after any geometry or palette change:
 
 ```bash

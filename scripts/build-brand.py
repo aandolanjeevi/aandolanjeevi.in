@@ -255,6 +255,29 @@ def main():
 '''
     (tmp / "fav-src.svg").write_text(fav)
 
+    # One-off GitHub uploads (rasterised to the tmp dir, not committed):
+    # repo social-preview (1280x640, the mark) and org avatar (the seal on
+    # paper — the seal is circular, so circle-cropping UIs frame it cleanly).
+    social = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="{OG_BG}"/>
+  <g transform="translate(640,204) scale(2.15)">
+  {mark(OG_INK, FLAME_DARK, "soc-halo", question_d)}
+  </g>
+  <path d="{text_path(deva700, "आंदोलनजीवी", 84, 640, 436)}" fill="{OG_INK}"/>
+  <path d="{text_path(latin400, "aandolanjeevi.in", 26, 640, 494, tracking=4)}" fill="{OG_MUTED}"/>
+</svg>
+'''
+    (tmp / "social-src.svg").write_text(social)
+
+    seal_body = seal.split("\n", 1)[1]  # reuse the seal file minus its XML prolog line
+    avatar = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="{PAPER}"/>
+  <svg x="32" y="32" width="960" height="960" viewBox="-60 -60 120 120">
+  {seal_body}
+</svg>
+'''
+    (tmp / "avatar-src.svg").write_text(avatar)
+
     print("wrote img/logo.svg img/seal.svg _includes/logo.njk")
     print(f"png sources in {tmp}")
 
