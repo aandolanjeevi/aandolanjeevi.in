@@ -8,6 +8,7 @@
   --line: #dddddd;
   --link: #0044cc;
   --dead: #a03030;
+  --flame: #C2401A; /* the mark's torch flame — see DESIGN.md § Logo */
   color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
     --line: #333333;
     --link: #7aa2ff;
     --dead: #e08080;
+    --flame: #E06A45;
   }
 }
 
@@ -47,6 +49,14 @@ a { color: var(--link); }
   font-weight: 700;
   text-decoration: none;
   color: var(--fg);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.logo-mark {
+  height: 1.5em;
+  width: 1.5em;
+  flex: none;
 }
 .site-header nav {
   display: flex;

@@ -20,7 +20,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(rssPlugin);
   // Repo docs and non-site directories are not site pages.
-  for (const f of ["README.md", "PLAN.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "POLICY.md", "MAINTAINERS.md"]) {
+  for (const f of ["README.md", "PLAN.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "POLICY.md", "MAINTAINERS.md", "DESIGN.md"]) {
     eleventyConfig.ignores.add(f);
   }
   eleventyConfig.ignores.add("workers");
@@ -30,6 +30,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("js");
+  eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addGlobalData("locales", locales);
 
   // t: UI string lookup with English fallback. Usage: "nav.resources" | t(lang)
