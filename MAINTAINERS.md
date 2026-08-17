@@ -28,6 +28,15 @@ Capture modes (automatic): `static` (default), `render` (headless browser in
 Docker — entries with `render: true` or `kind: post`), `video` (yt-dlp —
 `kind: video`).
 
+**`render: true` decision rule:** set it on archivable entries whose content
+only exists after JavaScript runs — verify with
+`curl -sL <url> | sed 's/<[^>]*>/ /g'`: chrome-around-nothing means render.
+`kind: post` renders automatically; on interactive kinds the flag is inert
+(never packaged; screenshots always use the browser). Missing the flag
+archives an empty shell permanently — the fix is the farmers-protest
+procedure: set `render: true`, null the package fields (keep a comment noting
+the superseded identifiers), let the next packages run re-capture.
+
 **Known limits:** YouTube blocks CI runner IPs for video downloads — run
 `npm run archive-packages` locally (needs `.env`, see below) for YouTube
 entries. Never put account cookies into CI to work around this.
