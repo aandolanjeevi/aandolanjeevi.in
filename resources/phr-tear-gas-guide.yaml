@@ -17,8 +17,8 @@ added: 2026-08-01
 status: live
 archive:
   wayback: null
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
-  captured_at: null
+  ia_item: "https://archive.org/details/aandolanjeevi-phr-tear-gas-guide-20260821"
+  zenodo_doi: "10.5281/zenodo.22037960"
+  sha256: "a1e838291ef4c63160eba1ba3d0022a82275097e9ecc5ec65dc7e5cd8bd59fd2"
+  captured_at: "2026-08-21"
   screenshot: null
