@@ -18,8 +18,8 @@ status: live
 #   DOI 10.5281/zenodo.21927762 (permanent; kept as historical record)
 archive:
   wayback: "https://web.archive.org/web/20260814035040/https://cryptpad.fr/pad/"
-  ia_item: null
-  zenodo_doi: null
-  sha256: null
-  captured_at: "2026-08-14"
+  ia_item: "https://archive.org/details/aandolanjeevi-farmer-protest-2021-india-20260821"
+  zenodo_doi: "10.5281/zenodo.22037917"
+  sha256: "c0a4b4351211b76a981a160aaca4365024ee6a54dbaa2813b6e04f57141d2dde"
+  captured_at: "2026-08-21"
   screenshot: null
