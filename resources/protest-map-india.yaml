@@ -17,9 +17,9 @@ render: true
 added: 2026-08-01
 status: live
 archive:
-  wayback: null
+  wayback: "https://web.archive.org/web/20260824040431/https://protest-map.free.gen.in/"
   ia_item: null
   zenodo_doi: null
   sha256: null
-  captured_at: null
+  captured_at: "2026-08-24"
   screenshot: null
